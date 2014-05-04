@@ -192,7 +192,7 @@ public static void HandlerEx02()
 @SJC.Interrupt
 public static void HandlerEx03()
 {
-	Content.Foot.frame_01("Hallo du nase");
+	Content.Foot.frame_01("Breakpoint");
 	Screen.blue();
 	//confirmMAInterrupt();
 	while(true);
