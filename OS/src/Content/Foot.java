@@ -4,7 +4,7 @@ import Stream.Color;
 import Stream.Colors;
 import Stream.Output;
 import Video.Display;
-import Video.VidPos;
+
 import Stream.*;
 
 public class Foot 
@@ -13,18 +13,18 @@ public class Foot
 	
 	private static final int width = 20;
 	
-	public static int fg = Colors.black;
-	public static int bg = Colors.white;	
-	public static Color col;
-	public static Color colCompl;	
+	public static int fg = Colors.green;
+	public static int bg = Colors.black;	
+	public static byte color;
+	public static byte colorCompl;	
 	public static int pos = 1840;
 	public static int start = 1840;
 	public static int end = 2000;
 
 	public static void init()
 	{
-		col.setColor(bg, fg);
-		colCompl.setColor(fg, bg);	
+		color = Color.getColor(fg, bg);
+		colorCompl= Color.getColor(bg, fg);	
 	}
 	
 	public static void cls()

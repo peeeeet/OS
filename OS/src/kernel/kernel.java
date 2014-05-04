@@ -6,6 +6,7 @@ import Stream.Colors;
 import System.BIOS;
 import Video.Display;
 import Video.VidMem;
+import Content.*;
 public class Kernel {
 	
 private static Interrupt INTController;
@@ -28,15 +29,18 @@ private static int count = 0;
 		//Display & Interrupt init
 		Interrupt.init();	
 		//Interrupt.activate();
-		
+		Head.init();
+		Body.init();
+		Foot.init();
 		//4c
-		//getMemoryMap();
+
 		
-		Content.Head.cls();
-		Content.Body.cls();
-		Content.Foot.cls();
+		//Head.cls();
+		//Body.cls();
+		//Foot.cls();
 		
-		
+		//Body.printMem();
+				
 		Interrupt.activate();
 		
 	}

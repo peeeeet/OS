@@ -4,7 +4,6 @@ import kernel.Memory;
 import Stream.*;
 import System.BIOS;
 import Video.Display;
-import Video.VidPos;
 
 public class Body 
 {
@@ -13,51 +12,51 @@ public class Body
 	
 	public static int fg = Colors.black;
 	public static int bg = Colors.white;	
-	public static Color col;
-	public static Color colCompl;	
+	public static byte color;
+	public static byte colorCompl;	
 	public static int pos = 80;
 	public static int start = 80;
 	public static int end = 1840;
 
 	public static void init()
 	{
-		col.setColor(bg, fg);
-		colCompl.setColor(fg, bg);	
+		color = Color.getColor(fg, bg);
+		colorCompl= Color.getColor(bg, fg);	
 	}
 	
 	public static void cls()
 	{
-		Out.putMode(MODE);
+		Output.putMode(MODE);
 		Screen.clear();
 	}
 	
 	public static void frame(String str)
 	{
-		Out.putMode(MODE);
+		Output.putMode(MODE);
 		Out.print(str);
 	}
 	
 	public static void frame(int i)
 	{
-		Out.putMode(MODE);
+		Output.putMode(MODE);
 		Out.print(i);
 	}
 	
 	public static void frame(long l)
 	{
-		Out.putMode(MODE);
+		Output.putMode(MODE);
 		Out.print(l);
 	}
 	
 	public static void frameHex(long l)
 	{
-		Out.putMode(MODE);
+		Output.putMode(MODE);
 		Hex.print(l);
 	}
 	
 	public static void frameHex(int i)
 	{
-		Out.putMode(MODE);
+		Output.putMode(MODE);
 		Hex.print(i);
 	}
 	
@@ -149,6 +148,16 @@ public class Body
 		int startAdd = Memory.MEMORY_MAP_ADDRESS;
 		
 		BIOS.regs.EBX=0x00;
+		
+		Cursor.setAbs(0, 2);
+		Out.print("BASE");
+		Cursor.setAbs(20, 2);
+		Out.print("LENGTH");
+		Cursor.setAbs(40, 2);
+		Out.print("TYPE");
+		Cursor.setAbs(60, 2);
+		Out.print("EBX");
+		
 		do
 		{
 		BIOS.regs.EAX=0x0000E820;
@@ -162,34 +171,45 @@ public class Body
 		type = MAGIC.rMem32(startAdd+16);
 		if(type == 1)
 		{
-		Output.putColor(Colors.white, Colors.green);
-		Output.setCursor(0, i);
-		Output.printHex(base);
-		Output.setCursor(20, i);
-		Output.printHex(leng);
-		Output.setCursor(40, i);
-		Output.printHex(type);
-		Output.setCursor(60, i);
-		Output.printHex(BIOS.regs.EBX);
+		Output.setColor(Colors.green, Colors.white);
+		Cursor.setAbs(0, i);
+		Hex.print(base);
+		Cursor.setAbs(20, i);
+		Hex.print(leng);
+		Cursor.setAbs(40, i);
+		Hex.print(type);
+		Cursor.setAbs(60, i);
+		Hex.print(BIOS.regs.EBX);
 		}
 		if(type == 2)
 		{
-		Output.setMode(Display.BodyMode);
-		Output.setCursorAbs(0, i);
-		Output.setColor(Colors.white, Colors.red);
-		Output.printHex(base);
-		Output.setCursor(20, i);
-		Output.printHex(leng);
-		Output.setCursor(40, i);
-		Output.printHex(type);
-		Output.setCursor(60, i);
-		Output.printHex(BIOS.regs.EBX);
+		Output.setColor(Colors.red, Colors.white);
+		Cursor.setAbs(0, i);
+		Hex.print(base);
+		Cursor.setAbs(20, i);
+		Hex.print(leng);
+		Cursor.setAbs(40, i);
+		Hex.print(type);
+		Cursor.setAbs(60, i);
+		Hex.print(BIOS.regs.EBX);
+		}
+		if(type > 2 || type < 1)
+		{
+		Cursor.setAbs(0, i);
+		Output.setColor(Colors.organge,Colors.white);
+		Hex.print(base);
+		Cursor.setAbs(20, i);
+		Hex.print(leng);
+		Cursor.setAbs(40, i);
+		Hex.print(type);
+		Cursor.setAbs(60, i);
+		Hex.print(BIOS.regs.EBX);
 		}
 		i++;
 		}
 		while(BIOS.regs.EBX!=0x00);
 	}
 		
-	}
-		
 }
+		
+

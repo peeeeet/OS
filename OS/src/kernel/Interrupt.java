@@ -4,6 +4,7 @@ import map.RingBuffer;
 import Stream.Colors;
 import Stream.Output;
 import Stream.Grafic;
+import Stream.Screen;
 import Video.Display;
 import Video.VidMem;
 import rte.DynamicRuntime;
@@ -191,8 +192,10 @@ public static void HandlerEx02()
 @SJC.Interrupt
 public static void HandlerEx03()
 {
-	Content.Foot.frame_01("Breakpoint");
-	confirmMAInterrupt();
+	Content.Foot.frame_01("Hallo du nase");
+	Screen.blue();
+	//confirmMAInterrupt();
+	while(true);
 }
 
 @SJC.Interrupt

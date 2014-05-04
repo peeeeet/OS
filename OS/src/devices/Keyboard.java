@@ -323,9 +323,9 @@ public class Keyboard {
 			break;
 		case 0x31:
 			if (caps)
-				symbol = "!";
-			else
 				symbol = "N";
+			else
+				symbol = "n";
 			break;
 		case 0x32:
 			if (caps)
@@ -353,9 +353,13 @@ public class Keyboard {
 			break;
 		case 0x36:
 			if (caps)
+			{
 				caps = false;
+			}
 			else
+			{
 				caps = true; // Function Gross 54
+			}
 			break;
 		case 0x37:
 			symbol = "*"; // Function 55
@@ -369,8 +373,16 @@ public class Keyboard {
 			Body.Space();
 			break;
 		case 0x3A:
-			Head.frame_01("[Caps]   ");
-			caps = true; // Function Capslock 58
+			if(caps)
+			{
+				caps = false; // Function Capslock 58				
+				Head.frame_01("         ");
+			}
+			else
+			{
+				caps = true;
+				Head.frame_01("[Caps]   ");
+			}
 			break;
 		case 0x3B:
 			Head.frame_01("[F1]     ");

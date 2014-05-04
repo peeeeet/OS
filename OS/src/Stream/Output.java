@@ -8,13 +8,13 @@ public class Output {
 	protected static int xSize = 80;
 	protected static int ySize = 23;
 	protected static int aciiPosInt = 48;
-	protected static int start = 0;
-	protected static int end = 0;
-	protected static int mode = 0;
+	protected static int start = 80;
+	protected static int end = 1840;
+	protected static int mode = 1;
 	protected static boolean trig = false;
 	protected static int curPos = 0;
-	protected static Color curCol;
-	protected static Color curCompCol;
+	protected static byte curCol;
+	protected static byte curColComp;
 	
 	protected Output() {
 		putMode(1);
@@ -42,8 +42,8 @@ public class Output {
 			start = Head.start;
 			end = Head.end;
 			curPos =  Head.pos;
-			curCol = Head.col;
-			curCompCol = Head.colCompl;
+			curCol = Head.color;
+			curColComp = Head.colorCompl;
 		}
 		// 1 Body
 		if (m == Body.MODE) 
@@ -52,8 +52,8 @@ public class Output {
 			start = Body.start;
 			end = Body.end;
 			curPos =  Body.pos;
-			curCol = Body.col;
-			curCompCol = Body.colCompl;
+			curCol = Body.color;
+			curColComp = Body.colorCompl;
 		}
 		// 2 Foot
 		if (m == Foot.MODE) 
@@ -62,8 +62,8 @@ public class Output {
 			start = Foot.start;
 			end = Foot.end;
 			curPos =  Foot.pos;
-			curCol = Foot.col;
-			curCompCol = Foot.colCompl;
+			curCol = Foot.color;
+			curColComp = Foot.colorCompl;
 		}
 
 	}
@@ -74,7 +74,7 @@ public class Output {
 			if (curPos < start || curPos  >= end)
 				curPos  = start;
 			VidMem.vid.digit[curPos ].ascii = (byte) c;
-			VidMem.vid.digit[curPos++].color = curCol.col();	
+			VidMem.vid.digit[curPos++].color = curCol;	
 	}
 	
 	protected static void putColor(byte color)
@@ -84,6 +84,11 @@ public class Output {
 			
 			VidMem.vid.digit[curPos].ascii = color;			
 		
+	}
+	
+	public static void setColor(int fg, int bg)
+	{
+		curCol = Color.getColor(fg, bg);			
 	}
 	
 	protected static void putPixel(int x, int y, int color) 
@@ -102,7 +107,7 @@ public class Output {
 				VidMem.vid.digit[i].ascii = VidMem.vid.digit[i - 1].ascii;
 				VidMem.vid.digit[i].color = VidMem.vid.digit[i - 1].color;
 			}
-			VidMem.vid.digit[curPos].color = curCol.col();
+			VidMem.vid.digit[curPos].color = curCol;
 			VidMem.vid.digit[curPos++].ascii = ' ';
 			if (curPos < start || curPos >= end)
 				curPos = start;
@@ -136,20 +141,20 @@ public class Output {
 	protected static void triggerCursor() {
 		if (trig) 
 		{
-			VidMem.vid.digit[curPos].color = curCol.col();
+			VidMem.vid.digit[curPos].color = curCol;
 
 			trig = false;
 		} 
 			else 
 		{
-			VidMem.vid.digit[curPos].color = curCol.col();
+			VidMem.vid.digit[curPos].color = curCol;
 			trig = true;
 		}
 	}
 
 	public static void putNewLine() {
 		if ((char) VidMem.vid.digit[curPos].ascii == ' ') {
-			VidMem.vid.digit[curPos].color = curCol.col();
+			VidMem.vid.digit[curPos].color = curCol;
 		}
 
 		if (curPos % xSize != 0) 

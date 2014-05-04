@@ -2,7 +2,6 @@ package rte;
 import java.lang.*;
 import kernel.Memory;
 
-import kernel.Segments;
 public class DynamicRuntime {
 private static int nextFreeAddress = 0;
 

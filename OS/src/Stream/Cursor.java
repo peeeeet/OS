@@ -19,7 +19,7 @@ public class Cursor extends Output{
 		int x;
 
 			if ((char) VidMem.vid.digit[curPos].ascii == ' ')
-				VidMem.vid.digit[curPos].color = curCol.col();
+				VidMem.vid.digit[curPos].color = curCol;
 
 			y = curPos / xSize;
 			x = curPos % xSize;
