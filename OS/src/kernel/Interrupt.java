@@ -26,7 +26,7 @@ private static boolean trigCol = false;
 public static void init()
 {
 	// Aktuelle Addresse initialisieren
-	curAdd = Memory.INTERRUPT_TABLE_ADDRESS
+	curAdd = Memory.INTERRUPT_TABLE_ADDRESS;
 	// Initialisiere PIC
 	initPic();
 	// Tabelle zusammenbauen
@@ -267,7 +267,6 @@ public static void HandlerEx15(int x)
 public static void HandlerEx32()
 {
 	
-	Output.setMode(Display.BodyMode);
 	if(buffer.getCount()>0)
 	{
 			key.decodInput((buffer.getCode()));	
@@ -278,7 +277,7 @@ public static void HandlerEx32()
 		
 		if(count == 1)
 		{
-			Output.triggerCursor();
+			//Output.triggerCursor();
 		}
 
 	}

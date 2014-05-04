@@ -1,5 +1,6 @@
 package rte;
 import java.lang.*;
+import kernel.Memory;
 
 import kernel.Segments;
 public class DynamicRuntime {
@@ -19,7 +20,7 @@ private static int nextFreeAddress = 0;
 		  if(nextFreeAddress==0)
 		  {
 			  // Start des Speicherabbilds holen
-			  	startAddress = Segments.getFreeAddress();
+			  	startAddress = Memory.getFreeAddress();
 		  }
 		  else
 		  {

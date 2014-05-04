@@ -1,6 +1,4 @@
 package Stream;
-import System.BIOS;
-import kernel.Interrupt;
 
 public class Grafic extends Output {
 
@@ -11,10 +9,10 @@ public class Grafic extends Output {
 		int x = 0;
 		int y = radius;
 
-		outputPixel(x0, y0 + radius, color);
-		outputPixel(x0, y0 - radius, color);
-		outputPixel(x0 + radius, y0, color);
-		outputPixel(x0 - radius, y0, color);
+		putPixel(x0, y0 + radius, color);
+		putPixel(x0, y0 - radius, color);
+		putPixel(x0 + radius, y0, color);
+		putPixel(x0 - radius, y0, color);
 
 		while (x < y) {
 			if (f >= 0) {
@@ -26,14 +24,14 @@ public class Grafic extends Output {
 			ddF_x += 2;
 			f += ddF_x + 1;
 
-			outputPixel(x0 + x, y0 + y, color);
-			outputPixel(x0 - x, y0 + y, color);
-			outputPixel(x0 + x, y0 - y, color);
-			outputPixel(x0 - x, y0 - y, color);
-			outputPixel(x0 + y, y0 + x, color);
-			outputPixel(x0 - y, y0 + x, color);
-			outputPixel(x0 + y, y0 - x, color);
-			outputPixel(x0 - y, y0 - x, color);
+			putPixel(x0 + x, y0 + y, color);
+			putPixel(x0 - x, y0 + y, color);
+			putPixel(x0 + x, y0 - y, color);
+			putPixel(x0 - x, y0 - y, color);
+			putPixel(x0 + y, y0 + x, color);
+			putPixel(x0 - y, y0 + x, color);
+			putPixel(x0 + y, y0 - x, color);
+			putPixel(x0 - y, y0 - x, color);
 		}
 	}
 
@@ -44,7 +42,7 @@ public class Grafic extends Output {
 	for(int i=0;i < 200;i++)
 	{
 		for(int j=0; j<320;j++)
-			outputPixel(j, i, Colors.blue);
+			putPixel(j, i, Colors.blue);
 	}
 	
 	for(int i=20;i>=0;i--)
@@ -66,14 +64,14 @@ public class Grafic extends Output {
 	{
 		for(int j=0;j<320;j++)
 		{
-		outputPixel(j,i,Colors.black);
+		putPixel(j,i,Colors.black);
 		}
 	}
 	
 	for(int i=140;i < 200;i++)
 	{
 		for(int j=0;j<320;j++)
-			outputPixel(j, i, Colors.black);			
+			putPixel(j, i, Colors.black);			
 	}
 	
 	for(int i=20;i>=0;i--)
@@ -93,13 +91,13 @@ public class Grafic extends Output {
 	for(int i=178;i < 195;i++)
 	{
 		for(int j=21;j<30;j++)
-			outputPixel(i, j, Colors.black);			
+			putPixel(i, j, Colors.black);			
 	}
 	// S quadrat
 	for(int i=163;i < 175;i++)
 	{
 		for(int j=31;j<40;j++)
-			outputPixel(i, j, Colors.black);			
+			putPixel(i, j, Colors.black);			
 	}
 	
 }

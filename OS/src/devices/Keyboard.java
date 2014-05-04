@@ -1,8 +1,7 @@
 package devices;
 
-import Stream.Colors;
-import Stream.Output;
-import Video.Display;
+import Content.Body;
+import Content.Head;
 
 public class Keyboard {
 
@@ -12,6 +11,7 @@ public class Keyboard {
 	private boolean b1 = false;
 	private boolean b3 = false;
 	private boolean b2 = false;
+	private String tab = "      ";
 
 	public void decodInput(byte cod) {
 		
@@ -26,18 +26,16 @@ public class Keyboard {
 		
 		if(b1==true)
 		{
-			if (caps)
-				Output.print(getregularCapSymbol(cod));
-			else
-				Output.print(getregularSymbol(cod));
+
+			Body.frame(getregularSymbol(cod));
 		}
 		else if (b2==true)
 		{   
-			Output.print(get2byteSymbol(cod));
+			
 		}
 		else if (b3==true)
 		{
-			Output.print(get3byteSymbol(cod));
+			
 		}
 		
 		
@@ -50,309 +48,410 @@ public class Keyboard {
 		String symbol = null;
 		switch (val) {
 		case 0x01:
-			Output.setMode(Display.HeadMode);
-			Output.setCursorAbs(0, 0);
-			Output.print("[ESC]    ");
+			Head.frame_01("[ESC]    ");
 			break;
 		case 0x02:
-			symbol = "1";
+			if (caps)
+				symbol = "!";
+			else
+				symbol = "1";
 			break;
 		case 0x03:
-			symbol = "2";
+			if (caps)
+				symbol = "\"";
+			else
+				symbol = "2";
 			break;
 		case 0x04:
-			symbol = "3";
+			if (caps)
+				symbol = "�";
+			else
+				symbol = "3";
 			break;
 		case 0x05:
-			symbol = "4";
+			if (caps)
+				symbol = "$";
+			else
+				symbol = "4";
 			break;
 		case 0x06:
-			symbol = "5";
+			if (caps)
+				symbol = "%";
+			else
+				symbol = "5";
 			break;
 		case 0x07:
-			symbol = "6";
+			if (caps)
+				symbol = "&";
+			else
+				symbol = "6";
 			break;
 		case 0x08:
-			symbol = "7";
+			if (caps)
+				symbol = "/";
+			else
+				symbol = "7";
 			break;
 		case 0x09:
-			symbol = "8";
+			if (caps)
+				symbol = "(";
+			else
+				symbol = "8";
 			break;
 		case 0x0A:
-			symbol = "9";
+			if (caps)
+				symbol = ")";
+			else
+				symbol = "9";
 			break;
 		case 0x0B:
-			symbol = "0";
+			if (caps)
+				symbol = "=";
+			else
+				symbol = "0";
 			break;
 		case 0x0C:
-			symbol = "ß";
+			if (caps)
+				symbol = "?";
+			else
+				symbol = "ss";
 			break;
 		case 0x0D:
-			symbol = "`";
+			if (caps)
+				symbol = "�";
+			else
+				symbol = "`";
 			break;
 		case 0x0E: // Function Return
-			Output.setMode(Display.BodyMode);
-			Output.setCursor(-1, 0);
-			Output.print("  ");
-			Output.setCursor(-2, 0);
+			Body.ret();
 			break;
 		case 0x0F:
-			Output.setMode(Display.BodyMode);
-			Output.print("      "); // Function Tab
+			Body.frame(tab); // Function Tab
 			break;
 		case 0x10:
-			symbol = "q";
+			if (caps)
+				symbol = "Q";
+			else
+				symbol = "q";
 			break;
 		case 0x11:
-			symbol = "w";
+			if (caps)
+				symbol = "W";
+			else
+				symbol = "w";
 			break;
 		case 0x12:
-			symbol = "e";
+			if (caps)
+				symbol = "E";
+			else
+				symbol = "e";
 			break;
 		case 0x13:
-			symbol = "r";
+			if (caps)
+				symbol = "R";
+			else
+				symbol = "r";
 			break;
 		case 0x14:
-			symbol = "t";
+			if (caps)
+				symbol = "T";
+			else
+				symbol = "t";
 			break;
 		case 0x15:
-			symbol = "z";
+			if (caps)
+				symbol = "Z";
+			else
+				symbol = "z";
 			break;
 		case 0x16:
-			symbol = "u";
+			if (caps)
+				symbol = "U";
+			else
+				symbol = "u";
 			break;
 		case 0x17:
-			symbol = "i";
+			if (caps)
+				symbol = "I";
+			else
+				symbol = "i";
 			break;
 		case 0x18:
-			symbol = "o";
+			if (caps)
+				symbol = "O";
+			else
+				symbol = "o";
 			break;
 		case 0x19:
-			symbol = "p";
+			if (caps)
+				symbol = "P";
+			else
+				symbol = "p";
 			break;
 		case 0x1A:
-			symbol = "ü";
+			if (caps)
+				symbol = "UE";
+			else
+				symbol = "ue";
 			break;
 		case 0x1B:
-			symbol = "*";
+			if (caps)
+				symbol = "*";
+			else
+				symbol = "+";
 			break;
 		case 0x1C:
-			Output.setMode(Display.BodyMode);
-			Output.printNewLine(); // Function Enter
+			Body.newLine(); // Enter 28
 			break;
 		case 0x1D:
-			Output.setMode(Display.HeadMode);
-			Output.setCursorAbs(0, 0);
-			Output.print("[STRG]   ");
+			Head.frame_01("[STRG]   ");
 			// Function STRG
 			break;
 		case 0x1E:
-			symbol = "a";
+			if (caps)
+				symbol = "A";
+			else
+				symbol = "a";
 			break;
 		case 0x1F:
-			symbol = "s";
+			if (caps)
+				symbol = "S";
+			else
+				symbol = "s";
 			break;
 		case 0x20:
-			symbol = "d";
+			if (caps)
+				symbol = "D";
+			else
+				symbol = "d";
 			break;
 		case 0x21:
-			symbol = "f";
+			if (caps)
+				symbol = "F";
+			else
+				symbol = "f";
 			break;
 		case 0x22:
-			symbol = "g";
+			if (caps)
+				symbol = "G";
+			else
+				symbol = "g";
 			break;
 		case 0x23:
-			symbol = "h";
+			if (caps)
+				symbol = "H";
+			else
+				symbol = "h";
 			break;
 		case 0x24:
-			symbol = "j";
+			if (caps)
+				symbol = "J";
+			else
+				symbol = "j";
 			break;
 		case 0x25:
-			symbol = "k";
+			if (caps)
+				symbol = "K";
+			else
+				symbol = "k";
 			break;
 		case 0x26:
-			symbol = "l";
+			if (caps)
+				symbol = "L";
+			else
+				symbol = "l";
 			break;
 		case 0x27:
-			symbol = "ö";
+			if (caps)
+				symbol = "OE";
+			else
+				symbol = "oe";
 			break;
 		case 0x28:
-			symbol = "ä";
+			if (caps)
+				symbol = "AE";
+			else
+				symbol = "ae";
 			break;
 		case 0x29:
-			symbol = "^";
+			if (caps)
+				symbol = "�";
+			else
+				symbol = "^";
 			break;
 		case 0x2A:
-			caps = true; // Function Groß
+			if (caps)
+				caps = false;
+			else
+				caps = true; // Function Gross
 			break;
 		case 0x2B:
-			symbol = "#"; // 43
+			if (caps)
+				symbol = "'";
+			else
+				symbol = "#"; // 43
 			break;
 		case 0x2C:
-			symbol = "y";
+			if (caps)
+				symbol = "Y";
+			else
+				symbol = "y";
 			break;
 		case 0x2D:
-			symbol = "x";
+			if (caps)
+				symbol = "X";
+			else
+				symbol = "x";
 			break;
 		case 0x2E:
-			symbol = "c";
+			if (caps)
+				symbol = "C";
+			else
+				symbol = "c";
 			break;
 		case 0x2F:
-			symbol = "v";
+			if (caps)
+				symbol = "V";
+			else
+				symbol = "v";
 			break;
 		case 0x30:
-			symbol = "b";
+			if (caps)
+				symbol = "B";
+			else
+				symbol = "b";
 			break;
 		case 0x31:
-			symbol = "n";
+			if (caps)
+				symbol = "!";
+			else
+				symbol = "N";
 			break;
 		case 0x32:
-			symbol = "m";
+			if (caps)
+				symbol = "M";
+			else
+				symbol = "m";
 			break;
 		case 0x33:
-			symbol = ",";
+			if (caps)
+				symbol = ";";
+			else
+				symbol = ",";
 			break;
 		case 0x34:
-			symbol = ".";
+			if (caps)
+				symbol = ":";
+			else
+				symbol = ".";
 			break;
 		case 0x35:
+			if (caps)
+				symbol = "_";
+			else
 			symbol = "-"; // Function Strich 53
 			break;
 		case 0x36:
-			caps = true; // Function Groß 54
+			if (caps)
+				caps = false;
+			else
+				caps = true; // Function Gross 54
 			break;
 		case 0x37:
 			symbol = "*"; // Function 55
 			break;
 		case 0x38:
-			Output.setMode(Display.HeadMode);
-			Output.setCursorAbs(0, 0);
-			Output.print("[Alt Gr] ");
+			Head.frame_01("[Alt Gr] ");
 			// Function AltGr 56
 			break;
 		case 0x39:
-			Output.setMode(Display.BodyMode);
-			Output.setSpace(); // Function Space 57
+				// Function Space 57
+			Body.Space();
 			break;
 		case 0x3A:
-			Output.setMode(Display.HeadMode);
-			Output.setCursorAbs(60, 0);
-			Output.print("[Caps]   ");
+			Head.frame_01("[Caps]   ");
 			caps = true; // Function Capslock 58
 			break;
 		case 0x3B:
-			Output.setMode(Display.HeadMode);
-			Output.setCursorAbs(0, 0);
-			Output.print("[F1]     ");
+			Head.frame_01("[F1]     ");
 			// Function F1 59
 			break;
 		case 0x3C:
-			Output.setMode(Display.HeadMode);
-			Output.setCursorAbs(0, 0);
-			Output.print("[F2]     ");
+			Head.frame_01("[F2]     ");
 			// Function F2 60
 			break;
 		case 0x3D:
-			Output.setMode(Display.HeadMode);
-			Output.setCursorAbs(0, 0);
-			Output.print("[F3]     ");
+			Head.frame_01("[F3]     ");
 			// Function F3 61
 			break;
 		case 0x3E:
-			Output.setMode(Display.HeadMode);
-			Output.setCursorAbs(0, 0);
-			Output.print("[F4]     ");
+			Head.frame_01("[F4]     ");
 			// Function F4 62
 			break;
 		case 0x3F:
-			Output.setMode(Display.HeadMode);
-			Output.setCursorAbs(0, 0);
-			Output.print("[F5]     ");
+			Head.frame_01("[F5]     ");
 			// Function F5 63
 			break;
 		case 0x40:
-			Output.setMode(Display.HeadMode);
-			Output.setCursorAbs(0, 0);
-			Output.print("[F6]     ");
+			Head.frame_01("[F6]     ");
 			// Function F6 64
 			break;
 		case 0x41:
-			Output.setMode(Display.HeadMode);
-			Output.setCursorAbs(0, 0);
-			Output.print("[F7]     ");
+			Head.frame_01("[F7]     ");
 			// Function F7 65
 			break;
 		case 0x42:
-			Output.setMode(Display.HeadMode);
-			Output.setCursorAbs(0, 0);
-			Output.print("[F8]     ");
+			Head.frame_01("[F8]     ");
 			// Function F8 66
 			break;
 		case 0x43:
-			Output.setMode(Display.HeadMode);
-			Output.setCursorAbs(0, 0);
-			Output.print("[F9]     ");
+			Head.frame_01("[F9]     ");
 			// Function F9 67
 			break;
 		case 0x44:
-			Output.setMode(Display.HeadMode);
-			Output.setCursorAbs(0, 0);
-			Output.print("[F10]    ");
+			Head.frame_01("[F10]    ");
 			// Function F10 68
 			break;
 		case 0x45:
 			if (numb == false) {
-				Output.setMode(Display.HeadMode);
-				Output.setCursorAbs(0, 0);
-				Output.print("[Num]    ");
+				Head.frame_01("[Num]    ");
 				// Function Number 69
 				numb = true;
 			} else {
-				Output.setMode(Display.BodyMode);
-				Output.setCursorAbs(0, 0);
-				Output.print("       ");
+				Head.frame_01("       ");
 				// Function Number 69
 				numb = false;
 			}
 			break;
 		case 0x46:
 			if (this.scrolllock == false) {
-				Output.setMode(Display.HeadMode);
-				Output.setCursorAbs(0, 0);
-				Output.print("[Rollen] ");
+				Head.frame_01("[Rollen] ");
 				// Function Rollen runter 70
 				this.scrolllock = true;
 			} else {
-				Output.setMode(Display.BodyMode);
-				Output.setCursorAbs(0, 0);
-				Output.print("       ");
+				Body.frame(tab);
 				// Function Rollen runter 70
 				this.scrolllock = false;
 			}
 			break;
 		case 0x47:
 			if (numb == false) {
-				Output.setMode(Display.BodyMode);
-				Output.setPos1(); // Function Pos1 71 // mit
+				Body.Pos1(); // Function Pos1 71 // mit
 														// Num Zahl 7
 			} else
 				symbol = "7";
 			break;
 		case 0x48:
 			if (numb == false) {
-				Output.setMode(Display.HeadMode);
-				Output.setCursorAbs(0, 0);
-				Output.print("[Pfeil U]");
+				Head.frame_01("[Pfeil U]");
 				// Function Pfeil Oben 72 // mit Num Zahl 8
-				Output.setCursor(0, -1);
+				Body.Up();
 			} else
 				symbol = "8";
 			break;
 		case 0x49:
 			if (numb == false) {
-				Output.setMode(Display.HeadMode);
-				Output.setCursorAbs(0, 0);
-				Output.print("[Bild O] ");
+				Head.frame_01("[Bild O] ");
 				// Function Bild Oben 73 // mit Num Zahl 9
 			} else
 				symbol = "9";
@@ -362,11 +461,9 @@ public class Keyboard {
 			break;
 		case 0x4B:
 			if (numb == false) {
-				Output.setMode(Display.HeadMode);
-				Output.setCursorAbs(0, 0);
-				Output.print("[Pfeil L]");
+				Head.frame_01("[Pfeil L]");
 				// Function Pfeil links 75 // mit Num Zahl 4
-				Output.setCursor(-1, 0);
+				Body.Left();
 			} else
 				symbol = "4";
 			break;
@@ -376,11 +473,9 @@ public class Keyboard {
 			break;
 		case 0x4D:
 			if (numb == false) {
-				Output.setMode(Display.HeadMode);
-				Output.setCursorAbs(0, 0);
-				Output.print("[Pfeil R]");
+				Head.frame_01("[Pfeil R]");
 				// Function Pfeil rechts 77 // mit Num Zahl 6
-				Output.setCursor(1, 0);
+				Body.Right();
 			} else
 				symbol = "6";
 			break;
@@ -389,50 +484,39 @@ public class Keyboard {
 			break;
 		case 0x4F:
 			if (numb == false) {
-				Output.setMode(Display.HeadMode);
-				Output.setCursorAbs(0, 0);
-				Output.print("[End]    ");
+				Head.frame_01("[End]    ");
 				// Function End 79 // mit Num Zahl 1
 			} else
 				symbol = "1";
 			break;
 		case 0x50:
 			if (numb == false) {
-				Output.setMode(Display.HeadMode);
-				Output.setCursorAbs(0, 0);
-				Output.print("[Pfeil O]");
+				Head.frame_01("[Pfeil O]");
 				// Function Pfeil runter 80 // mit Num Zahl 2
-				Output.setCursor(0, 1);
+				Body.Down();
 			} else
 				symbol = "2";
 
 			break;
 		case 0x51:
 			if (numb == false) {
-				Output.setMode(Display.HeadMode);
-				Output.setCursorAbs(0, 0);
-				Output.print("[Bild D] ");
+				Head.frame_01("[Bild D] ");
 				// Function Bild runter 81 // mit Num Zahl 3
 			} else
 				symbol = "3";
 			break;
 		case 0x52:
 			if (numb == false) {
-				Output.setMode(Display.HeadMode);
-				Output.setCursorAbs(0, 0);
-				Output.print("[Einf]   ");
+				Head.frame_01("[Einf]   ");
 				// Function Einf 82 // mit Num Zahl 0
 			} else
 				symbol = "0";
 			break;
 		case 0x53:
 			if (numb == false) {
-				Output.setMode(Display.HeadMode);
-				Output.setCursorAbs(0, 0);
-				Output.print("[Entf]   ");
+				Head.frame_01("[Entf]   ");
 				// Function Entf 83 // mit Num Zahl
-				Output.setMode(Display.BodyMode);
-				Output.removeChar();
+				Body.entf();
 			} else
 				symbol = ",";
 			break;
@@ -440,21 +524,23 @@ public class Keyboard {
 			symbol = ""; // Function Nicht belegt 84
 			break;
 		case 0x55:
-			symbol = ""; // Function Nicht belegt 85
+			if (caps)
+				caps = false;
+			else
+				symbol = ""; // Function Nicht belegt 85
 			break;
 		case 0x56:
-			symbol = "<"; // Function < 86
+			if (caps)
+				symbol = ">";
+			else
+				symbol = "<"; // Function < 86
 			break;
 		case 0x57:
-			Output.setMode(Display.HeadMode);
-			Output.setCursorAbs(0, 0);
-			Output.print("[F11]   ");
+			Head.frame_01("[F11]   ");
 			// Function F11 87
 			break;
 		case 0x58:
-			Output.setMode(Display.HeadMode);
-			Output.setCursorAbs(0, 0);
-			Output.print("[F12]    ");
+			Head.frame_01("[F12]    ");
 			// Function F12 88
 			break;
 		case 0x5D:
@@ -470,517 +556,5 @@ public class Keyboard {
 		return symbol;
 	}
 
-	
-	
-	public String getregularCapSymbol(byte cod) {
-		int val = (int) cod;
-		val = val & 0x000000FF;
-		String symbol = null;
-		switch (val) {
-		case 0x01:
-			Output.setMode(Display.HeadMode);
-			Output.setCursorAbs(0, 0);
-			Output.print("[ESC]    ");
-			break;
-		case 0x02:
-			symbol = "!";
-			break;
-		case 0x03:
-			symbol = "\"";
-			break;
-		case 0x04:
-			symbol = "§";
-			break;
-		case 0x05:
-			symbol = "$";
-			break;
-		case 0x06:
-			symbol = "%";
-			break;
-		case 0x07:
-			symbol = "&";
-			break;
-		case 0x08:
-			symbol = "/";
-			break;
-		case 0x09:
-			symbol = "(";
-			break;
-		case 0x0A:
-			symbol = ")";
-			break;
-		case 0x0B:
-			symbol = "=";
-			break;
-		case 0x0C:
-			symbol = "?";
-			break;
-		case 0x0D:
-			symbol = "`";
-			break;
-		case 0x0E: // Function Return
-			Output.setCursor(-1, 0);
-			Output.print("  ");
-			Output.setCursor(-2, 0);
-			break;
-		case 0x0F:
-			Output.setMode(Display.BodyMode);
-			Output.print("      "); // Function Tab
-			break;
-		case 0x10:
-			symbol = "Q";
-			break;
-		case 0x11:
-			symbol = "W";
-			break;
-		case 0x12:
-			symbol = "E";
-			break;
-		case 0x13:
-			symbol = "R";
-			break;
-		case 0x14:
-			symbol = "T";
-			break;
-		case 0x15:
-			symbol = "Z";
-			break;
-		case 0x16:
-			symbol = "U";
-			break;
-		case 0x17:
-			symbol = "I";
-			break;
-		case 0x18:
-			symbol = "O";
-			break;
-		case 0x19:
-			symbol = "P";
-			break;
-		case 0x1A:
-			symbol = "Ü";
-			break;
-		case 0x1B:
-			symbol = "*";
-			break;
-		case 0x1C:
-			Output.setMode(Display.BodyMode);
-			Output.printNewLine(); // Function Enter
-			break;
-		case 0x1D:
-			Output.setMode(Display.HeadMode);
-			Output.setCursorAbs(0, 0);
-			Output.print("[STRG]   ");
-			// Function STRG
-			break;
-		case 0x1E:
-			symbol = "A";
-			break;
-		case 0x1F:
-			symbol = "S";
-			break;
-		case 0x20:
-			symbol = "D";
-			break;
-		case 0x21:
-			symbol = "F";
-			break;
-		case 0x22:
-			symbol = "G";
-			break;
-		case 0x23:
-			symbol = "H";
-			break;
-		case 0x24:
-			symbol = "J";
-			break;
-		case 0x25:
-			symbol = "K";
-			break;
-		case 0x26:
-			symbol = "L";
-			break;
-		case 0x27:
-			symbol = "Ö";
-			break;
-		case 0x28:
-			symbol = "Ä";
-			break;
-		case 0x29:
-			symbol = "°";
-			break;
-		case 0xAA:
-			caps = false; // Function Groß
-			break;
-		case 0x2B:
-			symbol = "'";
-			break;
-		case 0x2C:
-			symbol = "Y";
-			break;
-		case 0x2D:
-			symbol = "X";
-			break;
-		case 0x2E:
-			symbol = "C";
-			break;
-		case 0x2F:
-			symbol = "V";
-			break;
-		case 0x30:
-			symbol = "B";
-			break;
-		case 0x31:
-			symbol = "N";
-			break;
-		case 0x32:
-			symbol = "M";
-			break;
-		case 0x33:
-			symbol = ";";
-			break;
-		case 0x34:
-			symbol = ":";
-			break;
-		case 0x35:
-			symbol = "_"; // Function Strich 53
-			break;
-		case 0xB6:
-			caps = false; // Function Groß 54
-			break;
-		case 0x37:
-			symbol = "*"; // Function 55
-			break;
-		case 0x38:
-			Output.setMode(Display.HeadMode);
-			Output.setCursorAbs(0, 0);
-			Output.print("[Alt Gr] ");
-			// Function STRG
-			break;
-		case 0x39:
-			Output.setMode(Display.BodyMode);
-			Output.setSpace();
-			break;
-		case 0x3A:
-			Output.setMode(Display.HeadMode);
-			Output.setCursorAbs(60, 0);
-			Output.print("         ");
-			caps = false; // Function Capslock 58
-			break;
-		case 0x3B:
-			Output.setMode(Display.HeadMode);
-			Output.setCursorAbs(0, 0);
-			Output.print("[F1]     ");
-			// Function F1 59
-			break;
-		case 0x3C:
-			Output.setMode(Display.HeadMode);
-			Output.setCursorAbs(0, 0);
-			Output.print("[F2]     ");
-			// Function F2 60
-			break;
-		case 0x3D:
-			Output.setMode(Display.HeadMode);
-			Output.setCursorAbs(0, 0);
-			Output.print("[F3]     ");
-			// Function F3 61
-			break;
-		case 0x3E:
-			Output.setMode(Display.HeadMode);
-			Output.setCursorAbs(0, 0);
-			Output.print("[F4]     ");
-			// Function F4 62
-			break;
-		case 0x3F:
-			Output.setMode(Display.HeadMode);
-			Output.setCursorAbs(0, 0);
-			Output.print("[F5]     ");
-			// Function F5 63
-			break;
-		case 0x40:
-			Output.setMode(Display.HeadMode);
-			Output.setCursorAbs(0, 0);
-			Output.print("[F6]     ");
-			// Function F6 64
-			break;
-		case 0x41:
-			Output.setMode(Display.HeadMode);
-			Output.setCursorAbs(0, 0);
-			Output.print("[F7]     ");
-			// Function F7 65
-			break;
-		case 0x42:
-			Output.setMode(Display.HeadMode);
-			Output.setCursorAbs(0, 0);
-			Output.print("[F8]     ");
-			// Function F8 66
-			break;
-		case 0x43:
-			Output.setMode(Display.HeadMode);
-			Output.setCursorAbs(0, 0);
-			Output.print("[F9]     ");
-			// Function F9 67
-			break;
-		case 0x44:
-			Output.setMode(Display.HeadMode);
-			Output.setCursorAbs(0, 0);
-			Output.print("[F10]    ");
-			// Function F10 68
-			break;
-		case 0x45:
-			if (numb == false) {
-				Output.setMode(Display.HeadMode);
-				Output.setCursorAbs(0, 0);
-				Output.print("[Num]    ");
-				// Function Number 69
-				numb = true;
-			} else {
-				Output.setMode(Display.HeadMode);
-				Output.setCursorAbs(0, 0);
-				Output.print("         ");
-				// Function Number 69
-				numb = false;
-			}
-			break;
-		case 0x46:
-			if (this.scrolllock == false) {
-				Output.setMode(Display.HeadMode);
-				Output.setCursorAbs(0, 0);
-				Output.print("[Rollen] ");
-				// Function Rollen runter 70
-				this.scrolllock = true;
-			} else {
-				Output.setMode(Display.HeadMode);
-				Output.setCursorAbs(0, 0);
-				Output.print("         ");
-				// Function Rollen runter 70
-				this.scrolllock = false;
-			}
-			break;
-		case 0x47:
-			if (numb == false) {
-				Output.setMode(Display.BodyMode);
-				Output.setPos1(); // Function Pos1 71 // mit
-														// Num Zahl 7
-			} else
-				symbol = "7";
-			break;
-		case 0x48:
-			if (numb == false) {
-				Output.setMode(Display.HeadMode);
-				Output.setCursorAbs(0, 0);
-				Output.print("[Pfeil O]");
-				// Function Pfeil Oben 72 // mit Num Zahl 8
-				Output.setCursor(0, -1);
-			} else
-				symbol = "8";
-			break;
-		case 0x49:
-			if (numb == false) {
-				Output.setMode(Display.HeadMode);
-				Output.setCursorAbs(0, 0);
-				Output.print("[Bild O] ");
-				// Function Bild Oben 73 // mit Num Zahl 9
-			} else
-				symbol = "9";
-			break;
-		case 0x4A:
-			symbol = "-"; // Function Strich 74
-			break;
-		case 0x4B:
-			if (numb == false) {
-				Output.setMode(Display.HeadMode);
-				Output.setCursorAbs(0, 0);
-				Output.print("[Pfeil L]");
-				// Function Pfeil links 75 // mit Num Zahl 4
-				Output.setCursor(-1, 0);
-			} else
-				symbol = "4";
-			break;
-		case 0x4C:
-			if (numb == true) // Function mit Num Zahl 5 76
-				symbol = "5";
-			break;
-		case 0x4D:
-			if (numb == false) {
-				Output.setMode(Display.HeadMode);
-				Output.setCursorAbs(0, 0);
-				Output.print("[Pfeil R]");
-				// Function Pfeil rechts 77 // mit Num Zahl 6
-				Output.setCursor(1, 0);
-			} else
-				symbol = "6";
-			break;
-		case 0x4E:
-			symbol = "+"; // Function Plus 78
-			break;
-		case 0x4F:
-			if (numb == false) {
-				Output.setMode(Display.HeadMode);
-				Output.setCursorAbs(0, 0);
-				Output.print("[End]    ");
-				// Function End 79 // mit Num Zahl 1
-			} else
-				symbol = "1";
-			break;
-		case 0x50:
-			if (numb == false) {
-				Output.setMode(Display.HeadMode);
-				Output.setCursorAbs(0, 0);
-				Output.print("[Pfeil O]");
-				// Function Pfeil runter 80 // mit Num Zahl 2
-				Output.setCursor(0, 1);
-			} else
-				symbol = "2";
-
-			break;
-		case 0x51:
-			if (numb == false) {
-				Output.setMode(Display.HeadMode);	
-				Output.setCursorAbs(0, 0);
-				Output.print("[Bild D] ");
-				// Function Bild runter 81 // mit Num Zahl 3
-			} else
-				symbol = "3";
-			break;
-		case 0x52:
-			if (numb == false) {
-				Output.setMode(Display.HeadMode);
-				Output.setCursorAbs(0, 0);
-				Output.print("[Einf]   ");
-				// Function Einf 82 // mit Num Zahl 0
-			} else
-				symbol = "0";
-			break;
-		case 0x53:
-			if (numb == false) {
-				Output.setMode(Display.HeadMode);
-				Output.setCursorAbs(0, 0);
-				Output.print("[Entf]   ");
-				// Function Entf 83 // mit Num Zahl ,
-				Output.setMode(Display.BodyMode);
-				Output.removeChar();
-			} else
-				symbol = ",";
-			break;
-		case 0x54:
-			symbol = ""; // Function Nicht belegt 84
-			break;
-		case 0x55:
-			symbol = ""; // Function Nicht belegt 85
-			break;
-		case 0x56:
-			symbol = ">"; // Function < 86
-			break;
-		case 0x57:
-			Output.setMode(Display.HeadMode);
-			Output.setCursorAbs(0, 0);
-			Output.print("[F11]    ");
-			// Function F11 87
-			break;
-		case 0x58:
-			Output.setMode(Display.HeadMode);
-			Output.setCursorAbs(0, 0);
-			Output.print("[F12]    ");
-			// Function F12 88
-			break;
-		case 0x5D:
-			symbol = ""; // Function WIN 91
-			break;
-		case 0x5E:
-			symbol = ""; // Function WIN 92
-			break;
-		case 0x5F:
-			symbol = ""; // Function Rechtklick 93
-			break;
-		}
-		return symbol;
-	}
-
-	public String get2byteSymbol(byte cod) {
-		String symbol = null;
-		Output.printHex(cod);
-		Output.print(" ");
-		Output.printHex(cod);
-		Output.println();
-		switch (cod) {
-		case 0x01:
-			symbol = "ESC";
-			break;
-		case 0x02:
-			symbol = "1";
-			break;
-		case 0x03:
-			symbol = "2";
-			break;
-		case 0x04:
-			symbol = "3";
-			break;
-		case 0x05:
-			symbol = "4";
-			break;
-		case 0x06:
-			symbol = "5";
-			break;
-		case 0x07:
-			symbol = "6";
-			break;
-		case 0x08:
-			symbol = "7";
-			break;
-		case 0x09:
-			symbol = "8";
-			break;
-		case 0x0A:
-			symbol = "9";
-			break;
-		case 0x0B:
-			symbol = "0";
-			break;
-
-		}
-		return symbol;
-	}
-
-	public String get3byteSymbol(byte cod) {
-		String symbol = null;
-		switch (cod) {
-		case 0x01:
-			symbol = "ESC";
-			break;
-		case 0x02:
-			symbol = "1";
-			break;
-		case 0x03:
-			symbol = "2";
-			break;
-		case 0x04:
-			symbol = "3";
-			break;
-		case 0x05:
-			symbol = "4";
-			break;
-		case 0x06:
-			symbol = "5";
-			break;
-		case 0x07:
-			symbol = "6";
-			break;
-		case 0x08:
-			symbol = "7";
-			break;
-		case 0x09:
-			symbol = "8";
-			break;
-		case 0x0A:
-			symbol = "9";
-			break;
-		case 0x0B:
-			symbol = "0";
-			break;
-
-		}
-		return symbol;
-	}
 
 }

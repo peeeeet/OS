@@ -1,9 +1,5 @@
 package Stream;
 
-import Video.Display;
-import Video.VidMem;
-import Video.VidPos;
-
 public class Line extends Out
 {
 
@@ -28,9 +24,8 @@ public class Line extends Out
 	}
 	
 	private static void println() {
-		if (VidPos.posbody % xSize != 0)
-			VidPos.posbody += (xSize - VidPos.posbody
-					% xSize);
+		if (Output.curPos % xSize != 0)
+			Output.curPos += (xSize - Output.curPos % xSize);
 	}
 
 

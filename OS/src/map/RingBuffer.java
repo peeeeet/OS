@@ -39,7 +39,6 @@ public void add(byte val)
 
 }
 
-
 public byte getCode()
 {
 	byte b = buffer[readPos];

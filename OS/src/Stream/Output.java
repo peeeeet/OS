@@ -1,9 +1,7 @@
 package Stream;
-
-import Video.Display;
 import Video.VidMem;
-import Video.VidPos;
-import kernel.Segments;
+import Content.*;
+
 
 public class Output {
 	
@@ -14,6 +12,9 @@ public class Output {
 	protected static int end = 0;
 	protected static int mode = 0;
 	protected static boolean trig = false;
+	protected static int curPos = 0;
+	protected static Color curCol;
+	protected static Color curCompCol;
 	
 	protected Output() {
 		putMode(1);
@@ -23,52 +24,65 @@ public class Output {
 		putMode(m);
 	}
 
+	
+	public static void putMode(int m) {
+		
+		// Letzte VidPos nach Modus speichern
+		if(mode==Head.MODE)
+			Head.pos = curPos;
+		if(mode==Body.MODE)
+			Body.pos = curPos;
+		if(mode==Foot.MODE)
+			Foot.pos = curPos;
+		
+		//  Neue VidPos und Startwerte setzten nach Modus
+		if (m == Head.MODE) 
+		{
+			mode = Head.MODE;
+			start = Head.start;
+			end = Head.end;
+			curPos =  Head.pos;
+			curCol = Head.col;
+			curCompCol = Head.colCompl;
+		}
+		// 1 Body
+		if (m == Body.MODE) 
+		{
+			mode = Body.MODE;
+			start = Body.start;
+			end = Body.end;
+			curPos =  Body.pos;
+			curCol = Body.col;
+			curCompCol = Body.colCompl;
+		}
+		// 2 Foot
+		if (m == Foot.MODE) 
+		{
+			mode = Foot.MODE;
+			start = Foot.start;
+			end = Foot.end;
+			curPos =  Foot.pos;
+			curCol = Foot.col;
+			curCompCol = Foot.colCompl;
+		}
+
+	}
+
+	
 	protected static void putChar(char c) 
 	{
-		if (mode == Display.HeadMode) 
-		{
-			if (VidPos.posHead < start || VidPos.posHead >= end)
-				VidPos.posHead = start;
-			VidMem.vid.digit[VidPos.posHead].ascii = (byte) c;
-			VidMem.vid.digit[VidPos.posHead++].color = Display.colHead.col();	
-		}
-		if (mode == Display.BodyMode) 
-		{
-			if (VidPos.posBody < start || VidPos.posBody >= end)
-				VidPos.posBody = start;
-			VidMem.vid.digit[VidPos.posBody].ascii = (byte) c;
-			VidMem.vid.digit[VidPos.posBody++].color = Display.colBody.col();
-		}
-		if (mode == Display.FootMode) 
-		{
-			if (VidPos.posFoot < start || VidPos.posFoot >= end)
-				VidPos.posFoot = start;
-			
-			VidMem.vid.digit[VidPos.posFoot].ascii = (byte) c;
-			VidMem.vid.digit[VidPos.posFoot++].color = Display.colFoot.col();
-		}
+			if (curPos < start || curPos  >= end)
+				curPos  = start;
+			VidMem.vid.digit[curPos ].ascii = (byte) c;
+			VidMem.vid.digit[curPos++].color = curCol.col();	
 	}
 	
 	protected static void putColor(byte color)
 	{
-		if (mode == Display.HeadMode) {
-			if (VidPos.posHead < start || VidPos.posHead >= end)
-				VidPos.posHead = start;
+			if (curPos < start || curPos >= end)
+				curPos = start;
 			
-			VidMem.vid.digit[VidPos.posHead++].ascii = color;			
-		}
-		if (mode == Display.BodyMode) {
-			if (VidPos.posBody < start || VidPos.posBody >= end)
-				VidPos.posBody = start;
-			
-			VidMem.vid.digit[VidPos.posBody++].color = color;
-		}
-		if (mode == Display.FootMode) {
-			if (VidPos.posFoot < start || VidPos.posFoot >= end)
-				VidPos.posFoot = start;
-			
-			VidMem.vid.digit[VidPos.posFoot++].color = color;
-		}
+			VidMem.vid.digit[curPos].ascii = color;			
 		
 	}
 	
@@ -79,175 +93,69 @@ public class Output {
 		start += x + (y * 320);
 		MAGIC.wMem8(start, (byte) color);
 	}
-		
-	public static void putMode(int m) {
-		// 0 Head
-		if (m == 0) {
-			mode = 0;
-			start = 0;
-			end = 80;
-		}
-		// 1 Body
-		if (m == 1) {
-			mode = 1;
-			start = 0;
-			end = 1840;
-		}
-		// 2 Foot
-		if (m == 2) {
-			mode = 2;
-			start = 0;
-			end = 80;
-		}
-
-	}
-		
-	protected static void putSpace() {
+				
+	public static void putSpace() {
 		int pos;
 
-		if (mode == Display.HeadMode) {
-			pos = VidPos.posHead;
+			pos = curPos;
 			for (int i = end; i > pos; i--) {
 				VidMem.vid.digit[i].ascii = VidMem.vid.digit[i - 1].ascii;
 				VidMem.vid.digit[i].color = VidMem.vid.digit[i - 1].color;
 			}
-			VidMem.vid.digit[VidPos.posHead].color = Display.colHead.col();
-			VidMem.vid.digit[VidPos.posHead++].ascii = ' ';
-			if (VidPos.posHead < start
-					|| VidPos.posHead >= end)
-				VidPos.posHead = start;
-		}
-		if (mode == Display.BodyMode) {
-			pos = VidPos.posBody;
-			for (int i = end; i > pos; i--) {
-				VidMem.vid.digit[i].ascii = VidMem.vid.digit[i - 1].ascii;
-				VidMem.vid.digit[i].color = VidMem.vid.digit[i - 1].color;
-			}
-			VidMem.vid.digit[VidPos.posBody].color = Display.colBody.col();
-			VidMem.vid.digit[VidPos.posFoot++].ascii = ' ';
-			if (VidPos.posBody < start
-					|| VidPos.posBody >= end)
-				VidPos.posBody = start;
-		}
-		if (mode == 2) {
-			pos = VidPos.posFoot;
-			for (int i = end; i > pos; i--) {
-				VidMem.vid.digit[i].ascii = VidMem.vid.digit[i - 1].ascii;
-				VidMem.vid.digit[i].color = VidMem.vid.digit[i - 1].color;
-			}
-			VidMem.vid.digit[VidPos.posFoot].color = Display.colHead.col();
-			VidMem.vid.digit[VidPos.posFoot++].ascii = ' ';
-			if (VidPos.posFoot < start
-					|| VidPos.posFoot >= end)
-				VidPos.posFoot = start;
-		}
+			VidMem.vid.digit[curPos].color = curCol.col();
+			VidMem.vid.digit[curPos++].ascii = ' ';
+			if (curPos < start || curPos >= end)
+				curPos = start;
+
 
 	}
 
-	protected static void removeChar() {
+	public static void removeChar() {
 		int pos;
 
-		if (mode == 0) {
-			pos = VidPos.posHead;
+			pos = curPos;
 			for (int i = pos; i < end - 1; i++) {
 				VidMem.vid.digit[i].ascii = VidMem.vid.digit[i + 1].ascii;
 				VidMem.vid.digit[i].color = VidMem.vid.digit[i + 1].color;
 			}
-			if (VidPos.posHead < start
-					|| VidPos.posHead >= end)
-				VidPos.posHead = start;
-		}
-		if (mode == 1) {
-			pos = VidPos.posBody;
-			for (int i = pos; i < end - 1; i++) {
-				VidMem.vid.digit[i].ascii = VidMem.vid.digit[i + 1].ascii;
-				VidMem.vid.digit[i].color = VidMem.vid.digit[i + 1].color;
-			}
-			if (VidPos.posBody < start
-					|| VidPos.posBody >= end)
-				VidPos.posBody = start;
-		}
-		if (mode == 2) {
-			pos = VidPos.posFoot;
-			for (int i = pos; i < end - 1; i++) {
-				VidMem.vid.digit[i].ascii = VidMem.vid.digit[i + 1].ascii;
-				VidMem.vid.digit[i].color = VidMem.vid.digit[i + 1].color;
-			}
-			if (VidPos.posFoot < start
-					|| VidPos.posFoot >= end)
-				VidPos.posFoot = start;
-		}
-
+			if (curPos < start|| curPos >= end)
+				curPos = start;
 	}
 
-	protected static void setPos1() {
+	public static void putPos1() {
 		int y;
 		int x;
+		x = 0;
+		curPos = x;
+		if (curPos < start || curPos >= end)
+				curPos = start;
 
-		if (mode == 0) {
-			x = 0;
-			VidPos.posHead = x;
-			if (VidPos.posHead < start
-					|| VidPos.posHead >= end)
-				VidPos.posHead = start;
-		}
-		if (mode == 1) {
-			x = VidPos.posBody % xSize;
-			VidPos.posBody = VidPos.posBody - x;
-			if (VidPos.posBody < start
-					|| VidPos.posBody >= end)
-				VidPos.posBody = start;
-		}
-		if (mode == 2) {
-			x = 0;
-			VidPos.posFoot = x;
-			if (VidPos.posFoot < start
-					|| VidPos.posFoot >= end)
-				VidPos.posFoot = start;
-		}
 
 	}
 
 	protected static void triggerCursor() {
-		if (trig) {
-			if (mode == 0) {
+		if (trig) 
+		{
+			VidMem.vid.digit[curPos].color = curCol.col();
 
-				VidMem.vid.digit[VidPos.posHead].color = Display.colHead.col();
-			}
-			if (mode == 1) {
-
-				VidMem.vid.digit[VidPos.posBody].color = Display.colBody.col();
-			}
-			if (mode == 2) {
-				VidMem.vid.digit[VidPos.posFoot].color = Display.colFoot.col();
-			}
 			trig = false;
-		} else {
-			if (mode == 0) {
-				VidMem.vid.digit[VidPos.posHead].color = Display.colComplHead.col();
-			}
-			if (mode == 1) {
-
-				VidMem.vid.digit[VidPos.posBody].color = Display.colComplBody.col();
-
-			}
-			if (mode == 2) {
-				VidMem.vid.digit[VidPos.posFoot].color = Display.colComplFoot.col();
-			}
+		} 
+			else 
+		{
+			VidMem.vid.digit[curPos].color = curCol.col();
 			trig = true;
 		}
 	}
 
-	protected static void printNewLine() {
-		if ((char) VidMem.vid.digit[VidPos.posBody].ascii == ' ') {
-			VidMem.vid.digit[VidPos.posBody].color = Display.colBody.col();
+	public static void putNewLine() {
+		if ((char) VidMem.vid.digit[curPos].ascii == ' ') {
+			VidMem.vid.digit[curPos].color = curCol.col();
 		}
 
-		if (VidPos.posBody % xSize != 0)
-			VidPos.posBody += (xSize - VidPos.posBody
-					% xSize);
+		if (curPos % xSize != 0) 
+			curPos += (xSize - curPos% xSize);
 		else
-			VidPos.posBody += xSize;
+			curPos += xSize;
 	}
 
 

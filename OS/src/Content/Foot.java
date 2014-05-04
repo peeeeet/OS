@@ -1,72 +1,85 @@
 package Content;
 
+import Stream.Color;
 import Stream.Colors;
 import Stream.Output;
 import Video.Display;
+import Video.VidPos;
 import Stream.*;
 
 public class Foot 
 {
-	
+	public static final int MODE = 2;
 	
 	private static final int width = 20;
-	public static int fg = Colors.green;
-	public static int bg = Colors.black;
 	
+	public static int fg = Colors.black;
+	public static int bg = Colors.white;	
+	public static Color col;
+	public static Color colCompl;	
+	public static int pos = 1840;
+	public static int start = 1840;
+	public static int end = 2000;
+
+	public static void init()
+	{
+		col.setColor(bg, fg);
+		colCompl.setColor(fg, bg);	
+	}
 	
 	public static void cls()
 	{
-		Output.setMode(Display.FootMode);
-		Screen.clear(bg);
+		Output.putMode(MODE);
+		Screen.clear();
 	}
 	
 	
 	public static void frame_01(String str)
 	{
-		Output.setMode(Display.FootMode);
-		Cursor.setCursorAbs(0, 0);
+		Output.putMode(MODE);
+		Cursor.setAbs(0, 0);
 		
 		for(int i = 0; i < width; i++)
-			Print.print(" ");
+			Out.print(" ");
 		
-		Cursor.setCursorAbs(0, 0);
-		Print.print(str);		
+		Cursor.setAbs(0, 0);
+		Out.print(str);		
 	}
 
 	public static void frame_02(String str)
 	{
-		Output.setMode(Display.FootMode);
-		Cursor.setCursorAbs(20, 0);
+		Output.putMode(MODE);
+		Cursor.setAbs(20, 0);
 		
 		for(int i = 0; i < width; i++)
-			Print.print(" ");
+			Out.print(" ");
 		
-		Cursor.setCursorAbs(20, 0);
-		Print.print(str);
+		Cursor.setAbs(20, 0);
+		Out.print(str);
 	}
 		
 	public static void frame_03(String str)
 	{
-		Output.setMode(Display.FootMode);
-		Cursor.setCursorAbs(40, 0);
+		Output.putMode(MODE);
+		Cursor.setAbs(40, 0);
 		
 		for(int i = 0; i < width; i++)
-			Print.print(" ");
+			Out.print(" ");
 		
-		Cursor.setCursorAbs(40, 0);
-		Print.print(str);
+		Cursor.setAbs(40, 0);
+		Out.print(str);
 	}
 
 	public static void frame_04(String str)
 	{
-		Output.setMode(Display.FootMode);
-		Cursor.setCursorAbs(60, 0);
+		Output.putMode(MODE);
+		Cursor.setAbs(60, 0);
 		
 		for(int i = 0; i < width; i++)
-			Print.print(" ");
+			Out.print(" ");
 		
-		Cursor.setCursorAbs(60, 0);
-		Print.print(str);
+		Cursor.setAbs(60, 0);
+		Out.print(str);
 	}
 	
 	
@@ -74,7 +87,7 @@ public class Foot
 /*
  * 
  * AUSAGABE Timer
-Output.setMode(Display.FootMode);
+Output.putMode(MODE);
 Output.setCursorAbs(76, 0);
 if(count == 1)
 	Output.print(" ");

@@ -15,7 +15,8 @@ public class String
 	  {
 	    return value[i];
 	  }
-	  
+
+	  /*
 		public static void print(long x) {
 			// Schreibe - wenn x < 0
 			if (x < 0)
@@ -81,6 +82,6 @@ public class String
 	  {
 		  
 	  }
-	  
+	*/  
 }
 

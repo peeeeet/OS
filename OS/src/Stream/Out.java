@@ -30,7 +30,7 @@ public class Out extends Output
 		}
 		// Wenn Zahl = 0 dann Sonderfall
 		else {
-			outputChar((char) (aciiPosInt));
+			putChar((char) (aciiPosInt));
 		}
 	}
 
@@ -45,7 +45,7 @@ public class Out extends Output
 		}
 		// Wenn Zahl = 0 dann Sonderfall
 		else {
-			setChar((char) (aciiPosInt));
+			putChar((char) (aciiPosInt));
 		}
 
 	}
@@ -56,7 +56,7 @@ public class Out extends Output
 		if (x != 0) {
 			rekint2char(x / 10);
 			c = (x >= 0) ? (x % 10) : (x % 10) * -1;
-			setChar((char) (c + aciiPosInt));
+			putChar((char) (c + aciiPosInt));
 		}
 	}
 
@@ -67,7 +67,7 @@ public class Out extends Output
 		if (x != 0) {
 			reklong2char(x / 10);
 			c = (x >= 0) ? (x % 10) : (x % 10) * -1;
-			setChar((char) (c + aciiPosInt));
+			putChar((char) (c + aciiPosInt));
 		}
 	}
 
