@@ -1,43 +1,40 @@
 package rte;
 import java.lang.*;
+
+import Content.Head;
 import kernel.Memory;
 
 public class DynamicRuntime {
 private static int nextFreeAddress = 0;
+private static int  startAddress = 0;
 
+
+	  public static void init()
+	  {		  
+		  startAddress = Memory.getFreeAddress();
+	  }
+	
 	  public static Object newInstance(int scalarSize, int relocEntries, SClassDesc type) 
 	  	  {	
 		  
-		  // Variablen 
-		  int startAddress;
-		  int refSize;
+		  // Variablen
 		  int memsize;
-		  Object lastobj;
+		  Object lastObj = type;;
 		  
 		  
 		  // Startaddresse
-		  if(nextFreeAddress==0)
-		  {
-			  // Start des Speicherabbilds holen
-			  	startAddress = Memory.getFreeAddress();
-		  }
-		  else
-		  {
-			  startAddress = nextFreeAddress;
-		      
-		  }
+		  startAddress = nextFreeAddress;
 		  
 		  // Letztes Objekt ermitteln
-		  lastobj = type;
-			while(lastobj._r_next !=null)
+		  while(lastObj._r_next !=null)
 			{
-			  lastobj = lastobj._r_next;
+			  lastObj = lastObj._r_next;
 			}
 		  
 		  
-		  // Größe berechnen
-		  refSize = relocEntries * 4;
-		  memsize = scalarSize + refSize;
+		  // Groesse berechnen
+
+		  memsize = scalarSize + relocEntries * 4;
 		  
 		  // Auf 4Byte Alignieren
 		  while(memsize % 4 != 0) memsize++;
@@ -53,16 +50,16 @@ private static int nextFreeAddress = 0;
 		  
 		  // Object Variable initialisieren
 		  Object obj;
-		  obj = MAGIC.cast2Obj(startAddress+refSize);
+		  obj = MAGIC.cast2Obj(startAddress+relocEntries*4);
 		  
 		  // Ref und Scalar Größen im Obj speichern
-		  MAGIC.assign(obj._r_scalarSize , refSize); 
+		  MAGIC.assign(obj._r_scalarSize , scalarSize); 
 		  MAGIC.assign(obj._r_relocEntries , relocEntries);
 		  MAGIC.assign(obj._r_type , type);
 		  
 		  
 		  // Nächstes Objekt
-		  MAGIC.assign(lastobj._r_next, obj);
+		  MAGIC.assign(lastObj._r_next, obj);
 
 		  return obj;
 		  }
@@ -73,7 +70,10 @@ private static int nextFreeAddress = 0;
 		    SArray me;
 		    
 		    if (stdType==0 && unitType._r_type!=MAGIC.clssDesc("SClassDesc"))
+		    {
 		      MAGIC.inline(0xCC); //check type of unitType, we don't support interface arrays
+		      Head.frame_04("SARRAY");
+		    }
 		    scS=MAGIC.getInstScalarSize("SArray");
 		    rlE=MAGIC.getInstRelocEntries("SArray");
 		    if (arrDim>1 || entrySize<0) rlE+=length;
@@ -117,7 +117,11 @@ private static int nextFreeAddress = 0;
 		      if (check==dest) return true;
 		      check=check.parent;
 		    }
-		    if (asCast) MAGIC.inline(0xCC);
+		    if (asCast)
+		    {
+		    	MAGIC.inline(0xCC);
+		    	Head.frame_04("IsInstance");
+		    }
 		    return false;
 		  }
 		  
@@ -130,7 +134,10 @@ private static int nextFreeAddress = 0;
 		      if (check.owner==dest) return check;
 		      check=check.next;
 		    }
-		    if (asCast) MAGIC.inline(0xCC);
+		    if (asCast){
+		    MAGIC.inline(0xCC);
+			Head.frame_04("IsImple");
+		    }
 		    return null;
 		  }
 		  
@@ -143,7 +150,11 @@ private static int nextFreeAddress = 0;
 		      return false; //null is not an instance
 		    }
 		    if (o._r_type!=MAGIC.clssDesc("SArray")) { //will never match independently of arrDim
-		      if (asCast) MAGIC.inline(0xCC);
+		      if (asCast)
+		      {
+		    	  MAGIC.inline(0xCC);
+		    	  Head.frame_04("isArray");
+		      }
 		      return false;
 		    }
 		    if (clssType==MAGIC.clssDesc("SArray")) { //special test for arrays
@@ -154,12 +165,18 @@ private static int nextFreeAddress = 0;
 		    }
 		    //no specials, check arrDim and check for standard type
 		    if (o._r_stdType!=stdType || o._r_dim<arrDim) { //check standard types and array dimension
-		      if (asCast) MAGIC.inline(0xCC);
+		      if (asCast) {
+		    	  MAGIC.inline(0xCC);
+		    	  Head.frame_04("isArray");
+		      }
 		      return false;
 		    }
 		    if (stdType!=0) {
 		      if (o._r_dim==arrDim) return true; //array of standard-type matching
-		      if (asCast) MAGIC.inline(0xCC);
+		      if (asCast) {
+		    	  MAGIC.inline(0xCC);
+		    	  Head.frame_04("isArray");
+		      }
 		      return false;
 		    }
 		    //array of objects, make deep-check for class type (PicOS does not support interface arrays)
@@ -169,13 +186,19 @@ private static int nextFreeAddress = 0;
 		      if (clss==clssType) return true;
 		      clss=clss.parent;
 		    }
-		    if (asCast) MAGIC.inline(0xCC);
+		    if (asCast) {
+		    	  MAGIC.inline(0xCC);
+		    	  Head.frame_04("isArray");
+		      }
 		    return false;
 		  }
 		  
 		  public static void checkArrayStore(SArray dest, SArray newEntry) {
 		    if (dest._r_dim>1) isArray(newEntry, dest._r_stdType, dest._r_unitType._r_type, dest._r_dim-1, true);
-		    else if (dest._r_unitType==null) MAGIC.inline(0xCC);
+		    else if (dest._r_unitType==null) {
+		    	  MAGIC.inline(0xCC);
+		    	  Head.frame_04("checkArray");
+		      }
 		    else isInstance(newEntry, dest._r_unitType._r_type, true);
 		  }
 	}

@@ -20,6 +20,11 @@ public class Foot
 	public static int pos = 1840;
 	public static int start = 1840;
 	public static int end = 2000;
+	private static boolean trigCol = false;
+	private static int count = 0;
+	private static int s = 0;
+	private static int m = 0;
+	private static int h = 0;
 
 	public static void init()
 	{
@@ -46,7 +51,7 @@ public class Foot
 		Out.print(str);		
 	}
 
-	public static void frame_02(String str)
+	public static void frame_02(int val)
 	{
 		Output.putMode(MODE);
 		Cursor.setAbs(20, 0);
@@ -55,10 +60,10 @@ public class Foot
 			Out.print(" ");
 		
 		Cursor.setAbs(20, 0);
-		Out.print(str);
+		Hex.print(val);
 	}
 		
-	public static void frame_03(String str)
+	public static void frame_03(int val)
 	{
 		Output.putMode(MODE);
 		Cursor.setAbs(40, 0);
@@ -67,50 +72,51 @@ public class Foot
 			Out.print(" ");
 		
 		Cursor.setAbs(40, 0);
-		Out.print(str);
+		Out.print("KEY ");
+		Hex.print(val);
 	}
 
-	public static void frame_04(String str)
+	public static void frame_04_Timer()
 	{
 		Output.putMode(MODE);
 		Cursor.setAbs(60, 0);
 		
-		for(int i = 0; i < width; i++)
-			Out.print(" ");
+		if(s<60)
+		{
+			s+=1;
+		}
+		else
+		{
+			m+=1;
+			s=0;
+		}
+		if(m>60)
+		{
+			h+=1;
+			m=0;
+		}
 		
-		Cursor.setAbs(60, 0);
-		Out.print(str);
+		Out.print(h);
+		Out.print(" : ");
+		Out.print(m);
+		Out.print(" : ");
+		Out.print(s);
+		Out.print("  ");
+		
+		if(count == 4)
+			Out.print("+   ");
+		if(count == 8)
+			Out.print("++  ");
+		if(count == 12)
+			Out.print("+++ ");
+		if(count == 16 )
+		{
+			Out.print("++++");
+			count = 0;
+		}
+
+		count++;
 	}
 	
 	
 }
-/*
- * 
- * AUSAGABE Timer
-Output.putMode(MODE);
-Output.setCursorAbs(76, 0);
-if(count == 1)
-	Output.print(" ");
-if(count == 3)
-	Output.print("  ");
-if(count == 5)
-	Output.print("   ");
-if(count == 7 )
-{
-	Output.print("    ");
-	count = 0;
-}
-if(count == 0)
-{
-	if(trigCol)
-	{
-	Output.setAreaColor(75,79,0,0,Colors.white, Colors.green);
-	trigCol = false;
-	}
-	else
-	{
-		Output.setAreaColor(75,79,0,0,Colors.white, Colors.black);
-		trigCol = true;
-	}
-}
-*/

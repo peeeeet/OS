@@ -30,6 +30,13 @@ public class Body
 		Screen.clear();
 	}
 	
+	public static void blueScreen()
+	{
+		color = Color.getColor(Colors.white, Colors.blue);
+		Output.putMode(MODE);	
+		Screen.clear();
+	}
+	
 	public static void frame(String str)
 	{
 		Output.putMode(MODE);
@@ -54,10 +61,9 @@ public class Body
 		Hex.print(l);
 	}
 	
-	public static void frameHex(int i)
+	public static void frameHexTable(int num, int i)
 	{
-		Output.putMode(MODE);
-		Hex.print(i);
+
 	}
 	
 	public static void frame_01(String str)
@@ -135,6 +141,98 @@ public class Body
 	{
 		Output.putMode(MODE);
 		Output.removeChar();
+	}
+	
+	
+	public static void printPushA()
+	{
+		Output.putMode(MODE);
+		int ebp=0;
+		int val;
+		MAGIC.inline(0x89, 0x6D); 
+		MAGIC.inlineOffset(1, ebp); //mov [ebp+xx],ebp
+		
+		// Ebp Addresse
+		// Erste PUSHA Adresse EDI
+	    ebp+=4;
+
+
+	    Line.println(" ");
+	    Out.print("                   ");
+		Line.println("Breakpoint O_O");
+		
+		Out.print("                   ");
+		Out.print(1);
+		Out.print("      ");
+		Out.print("EDI");
+		Out.print("      ");
+		Hex.print(MAGIC.rMem32(ebp));	
+		ebp += 4;
+		Line.println("");
+		
+		Out.print("                   ");
+		Out.print(2);
+		Out.print("      ");
+		Out.print("ESI");
+		Out.print("      ");
+		Hex.print(MAGIC.rMem32(ebp));	
+		ebp += 4;
+		Line.println("");
+		
+		Out.print("                   ");
+		Out.print(3);
+		Out.print("      ");
+		Out.print("EBP");
+		Out.print("      ");
+		Hex.print(MAGIC.rMem32(ebp));	
+		ebp += 4;
+		Line.println("");
+		
+		Out.print("                   ");
+		Out.print(4);
+		Out.print("      ");
+		Out.print("ESP");
+		Out.print("      ");
+		Hex.print(MAGIC.rMem32(ebp));	
+		ebp += 4;
+		Line.println("");
+		
+		Out.print("                   ");
+		Out.print(5);
+		Out.print("      ");
+		Out.print("EBX");
+		Out.print("      ");
+		Hex.print(MAGIC.rMem32(ebp));	
+		ebp += 4;
+		Line.println("");
+		
+		Out.print("                   ");
+		Out.print(6);
+		Out.print("      ");
+		Out.print("EDX");
+		Out.print("      ");
+		Hex.print(MAGIC.rMem32(ebp));
+		ebp += 4;
+		Line.println("");
+		
+		Out.print("                   ");
+		Out.print(7);
+		Out.print("      ");
+		Out.print("ECX");
+		Out.print("      ");
+		Hex.print(MAGIC.rMem32(ebp));
+		ebp += 4;
+		Line.println("");
+		
+		Out.print("                   ");
+		Out.print(8);
+		Out.print("      ");
+		Out.print("EAX");
+		Out.print("      ");
+		Hex.print(MAGIC.rMem32(ebp));
+		ebp += 4;
+		Line.println("");
+		
 	}
 	
 	public static void printMem()

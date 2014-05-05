@@ -436,14 +436,14 @@ public class Keyboard {
 			}
 			break;
 		case 0x46:
-			if (this.scrolllock == false) {
+			if (scrolllock == false) {
 				Head.frame_01("[Rollen] ");
 				// Function Rollen runter 70
-				this.scrolllock = true;
+				scrolllock = true;
 			} else {
 				Body.frame(tab);
 				// Function Rollen runter 70
-				this.scrolllock = false;
+				scrolllock = false;
 			}
 			break;
 		case 0x47:

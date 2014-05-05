@@ -40,7 +40,7 @@ public static void cls()
 		Out.print(str);		
 	}
 
-	public static void frame_02(String str)
+	public static void frame_02(String str, int pos)
 	{
 		Output.putMode(MODE);
 		Cursor.setAbs(20, 0);
@@ -50,9 +50,11 @@ public static void cls()
 		
 		Cursor.setAbs(20, 0);
 		Out.print(str);
+		Out.print("  ");
+		Out.print(pos);
 	}
 		
-	public static void frame_03(String str)
+	public static void frame_03(String str,int pos)
 	{
 		Output.putMode(MODE);
 		Cursor.setAbs(40, 0);
@@ -62,6 +64,8 @@ public static void cls()
 		
 		Cursor.setAbs(40, 0);
 		Out.print(str);
+		Out.print("  ");
+		Out.print(pos);
 	}
 
 	public static void frame_04(String str)
@@ -74,6 +78,7 @@ public static void cls()
 		
 		Cursor.setAbs(60, 0);
 		Out.print(str);
+
 	}
 	
 }

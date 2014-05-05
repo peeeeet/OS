@@ -1,7 +1,10 @@
 package kernel;
 
 import map.RingBuffer;
+import Content.Body;
+import Content.Foot;
 import Stream.Colors;
+import Stream.Hex;
 import Stream.Output;
 import Stream.Grafic;
 import Stream.Screen;
@@ -39,13 +42,17 @@ public static void init()
 public static void activate()
 {
 	// Ring Buffer
-	buffer = new RingBuffer();
+	
 	// Keyboard
+	buffer = new RingBuffer();
 	key = new Keyboard();
+	
 	// Buffer und Keyboard initialisieren
 	buffer.init();
 	activateInterrupts();
-}
+	
+	
+}	
 
 public static void buildIntTable()
 {
@@ -192,10 +199,12 @@ public static void HandlerEx02()
 @SJC.Interrupt
 public static void HandlerEx03()
 {
+
+	confirmMAInterrupt();
+	
 	Content.Foot.frame_01("Breakpoint");
-	Screen.blue();
-	//confirmMAInterrupt();
-	while(true);
+	Body.blueScreen();
+	Body.printPushA();
 }
 
 @SJC.Interrupt
@@ -270,31 +279,18 @@ public static void HandlerEx15(int x)
 public static void HandlerEx32()
 {
 	
-	if(buffer.getCount()>0)
+	if(buffer.getCount()>2)
 	{
-			key.decodInput((buffer.getCode()));	
-	}
-	else
-	{
-		// Courser Trigger
-		
-		if(count == 1)
-		{
-			//Output.triggerCursor();
-		}
-
+			//key.decodInput((buffer.getCode()));	
 	}
 
-	Content.Head.frame_02("P");
 
-	//Output.print(buffer.getPos());
-	Content.Head.frame_03("R");
-	//Output.print(buffer.getreadPos());
-	
+	Content.Head.frame_02("P",buffer.getPos());
 
+	Content.Head.frame_03("R",buffer.getreadPos());
 
 	//count ++;
-	
+	Foot.frame_04_Timer();
 	confirmSLInterrupt();
 	confirmMAInterrupt();
 }
@@ -307,10 +303,9 @@ public static void HandlerEx33()
 	Content.Foot.frame_01("Keyboard");
 	val = MAGIC.rIOs8(0x60);
 	
-	//Content.Foot.frame_02(val);
+	Foot.frame_02(val);
 	
-	buffer.add(val);
-	
+	buffer.add(val);	
 	confirmSLInterrupt();
 	confirmMAInterrupt();
 }

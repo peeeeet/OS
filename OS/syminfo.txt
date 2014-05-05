@@ -1,10 +1,10 @@
 # --- SJC syminfo--- #
 
 BaseAddress: 0x00100000
-Image size: 25152 b = 25 kb
-Code size: 12154 b = 12 kb in 90 methods
-Strings: 167 with 553 characters using 10740 b = 11 kb
-ramInitAddr: 0x00000000, ramInitSize: 0 b, constMemorySize: 10740 b = 11 kb
+Image size: 30840 b = 31 kb
+Code size: 13287 b = 13 kb in 98 methods
+Strings: 230 with 958 characters using 15132 b = 15 kb
+ramInitAddr: 0x00000000, ramInitSize: 0 b, constMemorySize: 15132 b = 15 kb
 In-image symbol size: 0 b = 0 kb
 
 ----------
@@ -69,8 +69,8 @@ instRelocTableEntries: 2, instScalarTableSize: 8, instIndirScalarTableSize: 0
 - added statically allocated objects:
 - methods:
 no entry->00000000: #constr# Display() (skip candidate) (statCall) (stmtCnt==0, 0 bytes)
-no entry->00102CA4: void vgaMode() (statCall) (stmtCnt==2, 20 bytes)
-no entry->00102CC8: void textMode() (statCall) (stmtCnt==2, 20 bytes)
+no entry->00103DE4: void vgaMode() (statCall) (stmtCnt==2, 20 bytes)
+no entry->00103E08: void textMode() (statCall) (stmtCnt==2, 20 bytes)
 - size of code for methods: 40 bytes
 - added imports:
 - added interface-maps:
@@ -124,7 +124,7 @@ instRelocTableEntries: 2, instScalarTableSize: 8, instIndirScalarTableSize: 0
 - added statically allocated objects:
           00060FD8: const-ref
 - methods:
-no entry->00102CEC: void rint(int) (statCall) (stmtCnt==120, 1006 bytes)
+no entry->00103E2C: void rint(int) (statCall) (stmtCnt==120, 1006 bytes)
 - size of code for methods: 1006 bytes
 - added imports:
 - added interface-maps:
@@ -137,10 +137,10 @@ instRelocTableEntries: 2, instScalarTableSize: 8, instIndirScalarTableSize: 0
 - added vars:
 - added statically allocated objects:
 - methods:
-no entry->001030EC: void clear() (statCall) (stmtCnt==2, 43 bytes)
+no entry->0010422C: void clear() (statCall) (stmtCnt==2, 43 bytes)
 no entry->00000000: void setAreaColor(int,int,int,int,int,int) (skip candidate) (statCall) (stmtCnt==9, 0 bytes)
-no entry->00103128: void blue() (statCall) (stmtCnt==2, 51 bytes)
-- size of code for methods: 94 bytes
+no entry->00000000: void blue() (skip candidate) (statCall) (stmtCnt==2, 0 bytes)
+- size of code for methods: 43 bytes
 - added imports:
 - added interface-maps:
 
@@ -164,16 +164,16 @@ instRelocTableEntries: 2, instScalarTableSize: 8, instIndirScalarTableSize: 0
 - methods:
 no entry->00000000: #constr# Output() (skip candidate) (statCall) (stmtCnt==1, 0 bytes)
 no entry->00000000: #constr# Output(int) (skip candidate) (statCall) (stmtCnt==1, 0 bytes)
-no entry->0010316C: void putMode(int) (statCall) (stmtCnt==30, 299 bytes)
-no entry->001032A8: void putChar(char) (may be reduced to package private) (statCall) (stmtCnt==4, 118 bytes)
-no entry->00103330: void putColor(byte) (may be reduced to package private) (statCall) (stmtCnt==3, 78 bytes)
-no entry->00103390: void setColor(int,int) (statCall) (stmtCnt==1, 26 bytes)
-no entry->001033BC: void putPixel(int,int,int) (may be reduced to package private) (statCall) (stmtCnt==3, 56 bytes)
-no entry->00103404: void putSpace() (statCall) (stmtCnt==10, 251 bytes)
-no entry->00103510: void removeChar() (statCall) (stmtCnt==8, 191 bytes)
-no entry->001035E0: void putPos1() (statCall) (stmtCnt==6, 68 bytes)
+no entry->00104268: void putMode(int) (statCall) (stmtCnt==30, 299 bytes)
+no entry->001043A4: void putChar(char) (may be reduced to package private) (statCall) (stmtCnt==4, 118 bytes)
+no entry->0010442C: void putColor(byte) (may be reduced to package private) (statCall) (stmtCnt==3, 78 bytes)
+no entry->0010448C: void setColor(int,int) (statCall) (stmtCnt==1, 26 bytes)
+no entry->001044B8: void putPixel(int,int,int) (may be reduced to package private) (statCall) (stmtCnt==3, 56 bytes)
+no entry->00104500: void putSpace() (statCall) (stmtCnt==10, 251 bytes)
+no entry->0010460C: void removeChar() (statCall) (stmtCnt==8, 191 bytes)
+no entry->001046DC: void putPos1() (statCall) (stmtCnt==6, 68 bytes)
 no entry->00000000: void triggerCursor() (skip candidate) (statCall) (stmtCnt==7, 0 bytes)
-no entry->00103634: void putNewLine() (statCall) (stmtCnt==6, 147 bytes)
+no entry->00104730: void putNewLine() (statCall) (stmtCnt==6, 147 bytes)
 - size of code for methods: 1234 bytes
 - added imports:
 - added interface-maps:
@@ -189,12 +189,12 @@ instRelocTableEntries: 2, instScalarTableSize: 8, instIndirScalarTableSize: 0
 001000D8->clss-r/1: Stream.Screen screen (skip candidate)
 - added statically allocated objects:
 - methods:
-no entry->001036D8: void print(char) (may be reduced to package private) (statCall) (stmtCnt==1, 17 bytes)
-no entry->001036FC: void print(java.lang.String) (statCall) (stmtCnt==2, 92 bytes)
-no entry->00103768: void print(int) (statCall) (stmtCnt==7, 53 bytes)
-no entry->001037B0: void print(long) (statCall) (stmtCnt==7, 93 bytes)
-no entry->00103820: void rekint2char(int) (statCall) (stmtCnt==6, 99 bytes)
-no entry->00103894: void reklong2char(long) (statCall) (stmtCnt==6, 583 bytes)
+no entry->001047D4: void print(char) (may be reduced to package private) (statCall) (stmtCnt==1, 17 bytes)
+no entry->001047F8: void print(java.lang.String) (statCall) (stmtCnt==2, 92 bytes)
+no entry->00104864: void print(int) (statCall) (stmtCnt==7, 53 bytes)
+no entry->001048AC: void print(long) (statCall) (stmtCnt==7, 93 bytes)
+no entry->0010491C: void rekint2char(int) (statCall) (stmtCnt==6, 99 bytes)
+no entry->00104990: void reklong2char(long) (statCall) (stmtCnt==6, 583 bytes)
 - size of code for methods: 937 bytes
 - added imports:
 - added interface-maps:
@@ -207,12 +207,12 @@ instRelocTableEntries: 2, instScalarTableSize: 8, instIndirScalarTableSize: 0
 - added vars:
 - added statically allocated objects:
 - methods:
-no entry->00000000: void println(java.lang.String) (skip candidate) (statCall) (stmtCnt==2, 0 bytes)
+no entry->00104BE8: void println(java.lang.String) (statCall) (stmtCnt==2, 21 bytes)
 no entry->00000000: void println(char) (skip candidate) (statCall) (stmtCnt==2, 0 bytes)
 no entry->00000000: void println(int) (skip candidate) (statCall) (stmtCnt==2, 0 bytes)
 no entry->00000000: void println(long) (skip candidate) (statCall) (stmtCnt==2, 0 bytes)
-no entry->00103AEC: void println() (statCall) (stmtCnt==2, 62 bytes)
-- size of code for methods: 62 bytes
+no entry->00104C10: void println() (statCall) (stmtCnt==2, 62 bytes)
+- size of code for methods: 83 bytes
 - added imports:
 - added interface-maps:
 
@@ -228,8 +228,8 @@ instRelocTableEntries: 2, instScalarTableSize: 8, instIndirScalarTableSize: 0
 - methods:
 no entry->00000000: void print(byte) (skip candidate) (statCall) (stmtCnt==4, 0 bytes)
 no entry->00000000: void print(short) (skip candidate) (statCall) (stmtCnt==4, 0 bytes)
-no entry->00103B3C: void print(int) (statCall) (stmtCnt==4, 74 bytes)
-no entry->00103B98: void print(long) (statCall) (stmtCnt==4, 180 bytes)
+no entry->00104C60: void print(int) (statCall) (stmtCnt==4, 74 bytes)
+no entry->00104CBC: void print(long) (statCall) (stmtCnt==4, 180 bytes)
 - size of code for methods: 254 bytes
 - added imports:
 - added interface-maps:
@@ -242,8 +242,8 @@ instRelocTableEntries: 2, instScalarTableSize: 8, instIndirScalarTableSize: 0
 - added vars:
 - added statically allocated objects:
 - methods:
-no entry->00103C5C: void rasterCircle(int,int,int,int) (may be reduced to private) (statCall) (stmtCnt==27, 436 bytes)
-no entry->00103E20: void biosScreen() (statCall) (stmtCnt==37, 621 bytes)
+no entry->00104D80: void rasterCircle(int,int,int,int) (may be reduced to private) (statCall) (stmtCnt==27, 436 bytes)
+no entry->00104F44: void biosScreen() (statCall) (stmtCnt==37, 621 bytes)
 - size of code for methods: 1057 bytes
 - added imports:
 - added interface-maps:
@@ -256,8 +256,8 @@ instRelocTableEntries: 2, instScalarTableSize: 8, instIndirScalarTableSize: 0
 - added vars:
 - added statically allocated objects:
 - methods:
-no entry->001040A0: void setAbs(int,int) (statCall) (stmtCnt==4, 93 bytes)
-no entry->00104110: void set(int,int) (statCall) (stmtCnt==11, 208 bytes)
+no entry->001051C4: void setAbs(int,int) (statCall) (stmtCnt==4, 93 bytes)
+no entry->00105234: void set(int,int) (statCall) (stmtCnt==11, 208 bytes)
 - size of code for methods: 301 bytes
 - added imports:
 - added interface-maps:
@@ -274,7 +274,7 @@ instRelocTableEntries: 2, instScalarTableSize: 8, instIndirScalarTableSize: 0
           cnst-c/0: int red
         unres/inv.: int tur (skip candidate)
           cnst-c/0: int green
-          cnst-c/0: int blue (may be reduced to package private)
+          cnst-c/0: int blue
           cnst-c/0: int black
         unres/inv.: int yellow (skip candidate)
           cnst-c/0: int organge
@@ -299,7 +299,7 @@ instRelocTableEntries: 2, instScalarTableSize: 8, instIndirScalarTableSize: 0
 no entry->00000000: #constr# Color(int,int) (skip candidate) (statCall) (stmtCnt==2, 0 bytes)
 no entry->00000000: void setColor(int,int) (skip candidate) (statCall) (stmtCnt==2, 0 bytes)
 no entry->00000000: byte col() (skip candidate) (statCall) (stmtCnt==1, 0 bytes)
-no entry->001041F0: byte getColor(int,int) (statCall) (stmtCnt==4, 42 bytes)
+no entry->00105314: byte getColor(int,int) (statCall) (stmtCnt==4, 42 bytes)
 - size of code for methods: 42 bytes
 - added imports:
 - added interface-maps:
@@ -375,20 +375,30 @@ FFFFFFF4->inst-r/1: java.lang.Object _r_unitType (may be reduced to package priv
 ----------
 class rte.DynamicRuntime at 0010017C
 clssRelocTableEntries: 4, clssScalarTableSize: 8
-statRelocTableEntries: 0, statScalarTableSize: 4
+statRelocTableEntries: 0, statScalarTableSize: 8
 instRelocTableEntries: 2, instScalarTableSize: 8, instIndirScalarTableSize: 0
 - added vars:
 00100184->clss-s/4: int nextFreeAddress
+00100188->clss-s/4: int startAddress
 - added statically allocated objects:
+          001002CC: checkArray
+          00100318: isArray
+          00100360: isArray
+          001003A8: isArray
+          001003F0: isArray
+          00100438: IsImple
+          00100480: IsInstance
+          001004CC: SARRAY
 - methods:
-no entry->0010422C: java.lang.Object newInstance(int,int,rte.SClassDesc) (may be reduced to private) (statCall) (stmtCnt==28, 223 bytes)
-no entry->0010431C: rte.SArray newArray(int,int,int,int,rte.SClassDesc) (may be reduced to private) (statCall) (stmtCnt==15, 189 bytes)
-no entry->001043EC: void newMultArray(rte.SArray[],int,int,int,int,int,int,rte.SClassDesc) (may be reduced to private) (statCall) (stmtCnt==12, 249 bytes)
-no entry->001044F8: boolean isInstance(java.lang.Object,rte.SClassDesc,boolean) (may be reduced to private) (statCall) (stmtCnt==15, 89 bytes)
-no entry->00104564: rte.SIntfMap isImplementation(java.lang.Object,rte.SIntfDesc,boolean) (statCall) (stmtCnt==12, 79 bytes)
-no entry->001045C4: boolean isArray(rte.SArray,int,rte.SClassDesc,int,boolean) (may be reduced to private) (statCall) (stmtCnt==43, 294 bytes)
-no entry->001046FC: void checkArrayStore(rte.SArray,rte.SArray) (statCall) (stmtCnt==5, 92 bytes)
-- size of code for methods: 1215 bytes
+no entry->00105350: void init() (statCall) (stmtCnt==1, 12 bytes)
+no entry->0010536C: java.lang.Object newInstance(int,int,rte.SClassDesc) (may be reduced to private) (statCall) (stmtCnt==20, 222 bytes)
+no entry->0010545C: rte.SArray newArray(int,int,int,int,rte.SClassDesc) (may be reduced to private) (statCall) (stmtCnt==17, 200 bytes)
+no entry->00105534: void newMultArray(rte.SArray[],int,int,int,int,int,int,rte.SClassDesc) (may be reduced to private) (statCall) (stmtCnt==12, 249 bytes)
+no entry->00105640: boolean isInstance(java.lang.Object,rte.SClassDesc,boolean) (may be reduced to private) (statCall) (stmtCnt==17, 100 bytes)
+no entry->001056B4: rte.SIntfMap isImplementation(java.lang.Object,rte.SIntfDesc,boolean) (statCall) (stmtCnt==14, 90 bytes)
+no entry->00105720: boolean isArray(rte.SArray,int,rte.SClassDesc,int,boolean) (may be reduced to private) (statCall) (stmtCnt==51, 341 bytes)
+no entry->00105888: void checkArrayStore(rte.SArray,rte.SArray) (statCall) (stmtCnt==7, 103 bytes)
+- size of code for methods: 1317 bytes
 - added imports:
 - added interface-maps:
 
@@ -396,23 +406,23 @@ no entry->001046FC: void checkArrayStore(rte.SArray,rte.SArray) (statCall) (stmt
 class map.RingBuffer 
 clssRelocTableEntries: 4, clssScalarTableSize: 8
 statRelocTableEntries: 0, statScalarTableSize: 0
-instRelocTableEntries: 3, instScalarTableSize: 24, instIndirScalarTableSize: 0
+instRelocTableEntries: 3, instScalarTableSize: 20, instIndirScalarTableSize: 0
 - added vars:
 FFFFFFF4->inst-r/1: byte[] buffer
 00000008->inst-s/4: int curPos
 0000000C->inst-s/4: int readPos
 00000010->inst-s/4: int count
-00000014->inst-s/4: int size
+          cnst-c/0: int size
 - added statically allocated objects:
+          00100510: Init Buffer
 - methods:
-no entry->00104768: #constr# RingBuffer() (statCall) (stmtCnt==0, 8 bytes)
-no entry->00104780: void init() (statCall) (stmtCnt==1, 21 bytes)
-no entry->00000000: int getPos() (skip candidate) (statCall) (stmtCnt==1, 0 bytes)
-no entry->00000000: int getreadPos() (skip candidate) (statCall) (stmtCnt==1, 0 bytes)
-no entry->001047A8: int getCount() (statCall) (stmtCnt==1, 4 bytes)
-no entry->001047BC: void add(byte) (statCall) (stmtCnt==4, 66 bytes)
-no entry->00104810: byte getCode() (statCall) (stmtCnt==6, 92 bytes)
-- size of code for methods: 191 bytes
+no entry->00105900: void init() (statCall) (stmtCnt==2, 30 bytes)
+no entry->00105930: int getPos() (statCall) (stmtCnt==1, 4 bytes)
+no entry->00105944: int getreadPos() (statCall) (stmtCnt==1, 4 bytes)
+no entry->00105958: int getCount() (statCall) (stmtCnt==1, 4 bytes)
+no entry->0010596C: void add(byte) (statCall) (stmtCnt==4, 62 bytes)
+no entry->00000000: byte getCode() (skip candidate) (statCall) (stmtCnt==7, 0 bytes)
+- size of code for methods: 104 bytes
 - added imports:
 - added interface-maps:
 
@@ -426,89 +436,90 @@ instRelocTableEntries: 2, instScalarTableSize: 8, instIndirScalarTableSize: 0
           cnst-c/0: int INTERRUPT_TABLE_SIZE (may be reduced to package private)
           cnst-c/0: int MEMORY_MAP_ADDRESS
           cnst-c/0: int VIDEO
+        unres/inv.: int STACK_START_ADDRESS (skip candidate)
 - added statically allocated objects:
 - methods:
-no entry->0010487C: int getFreeAddress() (statCall) (stmtCnt==5, 50 bytes)
+no entry->001059BC: int getFreeAddress() (statCall) (stmtCnt==5, 50 bytes)
 - size of code for methods: 50 bytes
 - added imports:
 - added interface-maps:
 
 ----------
-class kernel.Kernel at 0010019C
+class kernel.Kernel at 001001A0
 clssRelocTableEntries: 4, clssScalarTableSize: 8
 statRelocTableEntries: 1, statScalarTableSize: 4
 instRelocTableEntries: 2, instScalarTableSize: 8, instIndirScalarTableSize: 0
 - added vars:
-00100188->clss-r/1: kernel.Interrupt INTController (skip candidate)
-001001A4->clss-s/4: int count (skip candidate)
+0010018C->clss-r/1: kernel.Interrupt INTController (skip candidate)
+001001A8->clss-s/4: int count (skip candidate)
 - added statically allocated objects:
 - methods:
-no entry->001048C0: void main() (statCall) (stmtCnt==8, 41 bytes)
-- size of code for methods: 41 bytes
+no entry->00105A00: void main() (statCall) (stmtCnt==12, 61 bytes)
+- size of code for methods: 61 bytes
 - added imports:
 - added interface-maps:
 
 ----------
-class kernel.Interrupt at 00100200
+class kernel.Interrupt at 00100204
 clssRelocTableEntries: 20, clssScalarTableSize: 8
 statRelocTableEntries: 2, statScalarTableSize: 13
 instRelocTableEntries: 2, instScalarTableSize: 8, instIndirScalarTableSize: 0
 - added vars:
           cnst-c/0: int MASTER
           cnst-c/0: int SLAVE
-00100208->clss-s/4: int curAdd
-0010020C->clss-s/4: int mask
-00100210->clss-s/4: int count (may be reduced to private)
-001001AC->clss-r/1: map.RingBuffer buffer
-001001A8->clss-r/1: devices.Keyboard key
-00100214->clss-s/1: boolean trigCol (skip candidate)
+0010020C->clss-s/4: int curAdd
+00100210->clss-s/4: int mask
+00100214->clss-s/4: int count (skip candidate)
+001001B0->clss-r/1: map.RingBuffer buffer
+001001AC->clss-r/1: devices.Keyboard key
+00100218->clss-s/1: boolean trigCol (skip candidate)
 - added statically allocated objects:
-          001002B4: Weitere
-          001002FC: Keyboard
-          00100344: R
-          00100380: P
-          001003BC: Reserviert
-          00100408: Page Fault
-          00100454: General Protection Error
-          001004BC: Double Fault
-          0010050C: Double Fault
-          0010055C: Reserviert
-          001005A8: Invalid Opcode
-          001005FC: Idx out of Range
-          00100654: INTO
-          00100694: Hallo du nase
-          001006E8: NMI
-          00100728: Debug Exc
-          00100774: Divide Error
+          00100560: Weitere
+          001005A8: Keyboard
+          001005F0: R
+          0010062C: P
+          00100668: Reserviert
+          001006B4: Page Fault
+          00100700: General Protection Error
+          00100768: Double Fault
+          001007B8: Double Fault
+          00100808: Reserviert
+          00100854: Invalid Opcode
+          001008A8: Idx out of Range
+          00100900: INTO
+          00100940: Breakpoint
+          0010098C: NMI
+          001009CC: Debug Exc
+          00100A18: Divide Error
 - methods:
-no entry->001048FC: void init() (may be reduced to package private) (statCall) (stmtCnt==4, 28 bytes)
-no entry->00104928: void activate() (may be reduced to package private) (statCall) (stmtCnt==4, 99 bytes)
-no entry->0010499C: void buildIntTable() (may be reduced to private) (statCall) (stmtCnt==37, 695 bytes)
-no entry->00104C64: void buildEntry(int,int) (may be reduced to private) (statCall) (stmtCnt==5, 88 bytes)
-no entry->00104CCC: void initPic() (may be reduced to private) (statCall) (stmtCnt==2, 26 bytes)
-no entry->00104CF8: void programmChip(int,int,int) (statCall) (stmtCnt==4, 69 bytes)
-no entry->00104D50: void activateInterrupts() (statCall) (stmtCnt==1, 2 bytes)
+no entry->00105A50: void init() (may be reduced to package private) (statCall) (stmtCnt==4, 28 bytes)
+no entry->00105A7C: void activate() (may be reduced to package private) (statCall) (stmtCnt==4, 83 bytes)
+no entry->00105AE0: void buildIntTable() (may be reduced to private) (statCall) (stmtCnt==37, 695 bytes)
+no entry->00105DA8: void buildEntry(int,int) (may be reduced to private) (statCall) (stmtCnt==5, 88 bytes)
+no entry->00105E10: void initPic() (may be reduced to private) (statCall) (stmtCnt==2, 26 bytes)
+no entry->00105E3C: void programmChip(int,int,int) (statCall) (stmtCnt==4, 69 bytes)
+no entry->00105E94: void activateInterrupts() (statCall) (stmtCnt==1, 2 bytes)
 no entry->00000000: void deactivateInterrupts() (skip candidate) (statCall) (stmtCnt==1, 0 bytes)
-no entry->00104D64: void loadDescTable(int) (statCall) (stmtCnt==9, 76 bytes)
-no entry->00104DC0: void confirmMAInterrupt() (statCall) (stmtCnt==1, 17 bytes)
-no entry->00104DE4: void confirmSLInterrupt() (statCall) (stmtCnt==1, 17 bytes)
-FFFFFFEC->00104E08: void HandlerEx00() (statCall) (stmtCnt==2, 23 bytes)
-FFFFFFE8->00104E30: void HandlerEx01() (statCall) (stmtCnt==2, 23 bytes)
-FFFFFFE4->00104E58: void HandlerEx02() (statCall) (stmtCnt==2, 23 bytes)
-FFFFFFE0->00104E80: void HandlerEx03() (statCall) (stmtCnt==3, 25 bytes)
-FFFFFFDC->00104EAC: void HandlerEx04() (statCall) (stmtCnt==2, 23 bytes)
-FFFFFFD8->00104ED4: void HandlerEx05() (statCall) (stmtCnt==2, 23 bytes)
-FFFFFFD4->00104EFC: void HandlerEx06() (statCall) (stmtCnt==2, 23 bytes)
-FFFFFFD0->00104F24: void HandlerEx07() (statCall) (stmtCnt==2, 23 bytes)
-FFFFFFCC->00104F4C: void HandlerEx08(int) (statCall) (stmtCnt==3, 31 bytes)
-FFFFFFC8->00104F7C: void HandlerEx09(int) (statCall) (stmtCnt==3, 31 bytes)
-FFFFFFC4->00104FAC: void HandlerEx13(int) (statCall) (stmtCnt==3, 31 bytes)
-FFFFFFC0->00104FDC: void HandlerEx14(int) (statCall) (stmtCnt==3, 31 bytes)
-FFFFFFBC->0010500C: void HandlerEx15(int) (statCall) (stmtCnt==3, 31 bytes)
-FFFFFFB8->0010503C: void HandlerEx32() (statCall) (stmtCnt==10, 116 bytes)
-FFFFFFB4->001050C0: void HandlerEx33() (statCall) (stmtCnt==6, 70 bytes)
-FFFFFFB0->00105118: void HandlerEx34() (statCall) (stmtCnt==3, 28 bytes)
-- size of code for methods: 1672 bytes
+no entry->00105EA8: void loadDescTable(int) (statCall) (stmtCnt==9, 76 bytes)
+no entry->00105F04: void confirmMAInterrupt() (statCall) (stmtCnt==1, 17 bytes)
+no entry->00105F28: void confirmSLInterrupt() (statCall) (stmtCnt==1, 17 bytes)
+FFFFFFEC->00105F4C: void HandlerEx00() (statCall) (stmtCnt==2, 23 bytes)
+FFFFFFE8->00105F74: void HandlerEx01() (statCall) (stmtCnt==2, 23 bytes)
+FFFFFFE4->00105F9C: void HandlerEx02() (statCall) (stmtCnt==2, 23 bytes)
+FFFFFFE0->00105FC4: void HandlerEx03() (statCall) (stmtCnt==4, 33 bytes)
+FFFFFFDC->00105FF8: void HandlerEx04() (statCall) (stmtCnt==2, 23 bytes)
+FFFFFFD8->00106020: void HandlerEx05() (statCall) (stmtCnt==2, 23 bytes)
+FFFFFFD4->00106048: void HandlerEx06() (statCall) (stmtCnt==2, 23 bytes)
+FFFFFFD0->00106070: void HandlerEx07() (statCall) (stmtCnt==2, 23 bytes)
+FFFFFFCC->00106098: void HandlerEx08(int) (statCall) (stmtCnt==3, 31 bytes)
+FFFFFFC8->001060C8: void HandlerEx09(int) (statCall) (stmtCnt==3, 31 bytes)
+FFFFFFC4->001060F8: void HandlerEx13(int) (statCall) (stmtCnt==3, 31 bytes)
+FFFFFFC0->00106128: void HandlerEx14(int) (statCall) (stmtCnt==3, 31 bytes)
+FFFFFFBC->00106158: void HandlerEx15(int) (statCall) (stmtCnt==3, 31 bytes)
+FFFFFFB8->00106188: void HandlerEx32() (statCall) (stmtCnt==7, 106 bytes)
+FFFFFFB4->00106204: void HandlerEx33() (statCall) (stmtCnt==7, 80 bytes)
+FFFFFFB0->00106264: void HandlerEx34() (statCall) (stmtCnt==3, 28 bytes)
+- size of code for methods: 1664 bytes
 - added imports:
 - added interface-maps:
 
@@ -535,8 +546,8 @@ FFFFFFF4->inst-r/1: char[] value
 00000008->inst-s/4: int count
 - added statically allocated objects:
 - methods:
-no entry->00105144: int length() (statCall) (stmtCnt==1, 4 bytes)
-no entry->00105158: char charAt(int) (statCall) (stmtCnt==1, 27 bytes)
+no entry->00106290: int length() (statCall) (stmtCnt==1, 4 bytes)
+no entry->001062A4: char charAt(int) (statCall) (stmtCnt==1, 27 bytes)
 - size of code for methods: 31 bytes
 - added imports:
 - added interface-maps:
@@ -571,264 +582,323 @@ instRelocTableEntries: 3, instScalarTableSize: 14, instIndirScalarTableSize: 0
 0000000D->inst-s/1: boolean b2
 FFFFFFF4->inst-r/1: java.lang.String tab
 - added statically allocated objects:
-          001007C4: 
-          001007FC: 
-          00100834: 
-          0010086C: [F12]    
-          001008B8: [F11]   
-          00100900: <
-          0010093C: >
-          00100978: 
-          001009B0: 
-          001009E8: ,
-          00100A24: [Entf]   
-          00100A70: 0
-          00100AAC: [Einf]   
-          00100AF8: 3
-          00100B34: [Bild D] 
-          00100B80: 2
-          00100BBC: [Pfeil O]
-          00100C08: 1
-          00100C44: [End]    
-          00100C90: +
-          00100CCC: 6
-          00100D08: [Pfeil R]
-          00100D54: 5
-          00100D90: 4
-          00100DCC: [Pfeil L]
-          00100E18: -
-          00100E54: 9
-          00100E90: [Bild O] 
-          00100EDC: 8
-          00100F18: [Pfeil U]
-          00100F64: 7
-          00100FA0: [Rollen] 
-          00100FEC:        
-          00101034: [Num]    
-          00101080: [F10]    
-          001010CC: [F9]     
-          00101118: [F8]     
-          00101164: [F7]     
-          001011B0: [F6]     
-          001011FC: [F5]     
-          00101248: [F4]     
-          00101294: [F3]     
-          001012E0: [F2]     
-          0010132C: [F1]     
-          00101378: [Caps]   
-          001013C4:          
-          00101410: [Alt Gr] 
-          0010145C: *
-          00101498: -
-          001014D4: _
-          00101510: .
-          0010154C: :
-          00101588: ,
-          001015C4: ;
-          00101600: m
-          0010163C: M
-          00101678: n
-          001016B4: N
-          001016F0: b
-          0010172C: B
-          00101768: v
-          001017A4: V
-          001017E0: c
-          0010181C: C
-          00101858: x
-          00101894: X
-          001018D0: y
-          0010190C: Y
-          00101948: #
-          00101984: '
-          001019C0: ^
-          001019FC: °
-          00101A38: ae
-          00101A74: AE
-          00101AB0: oe
-          00101AEC: OE
-          00101B28: l
-          00101B64: L
-          00101BA0: k
-          00101BDC: K
-          00101C18: j
-          00101C54: J
-          00101C90: h
-          00101CCC: H
-          00101D08: g
-          00101D44: G
-          00101D80: f
-          00101DBC: F
-          00101DF8: d
-          00101E34: D
-          00101E70: s
-          00101EAC: S
-          00101EE8: a
-          00101F24: A
-          00101F60: [STRG]   
-          00101FAC: +
-          00101FE8: *
-          00102024: ue
-          00102060: UE
-          0010209C: p
-          001020D8: P
-          00102114: o
-          00102150: O
-          0010218C: i
-          001021C8: I
-          00102204: u
-          00102240: U
-          0010227C: z
-          001022B8: Z
-          001022F4: t
-          00102330: T
-          0010236C: r
-          001023A8: R
-          001023E4: e
-          00102420: E
-          0010245C: w
-          00102498: W
-          001024D4: q
-          00102510: Q
-          0010254C: `
-          00102588: ´
-          001025C4: ss
-          00102600: ?
-          0010263C: 0
-          00102678: =
-          001026B4: 9
-          001026F0: )
-          0010272C: 8
-          00102768: (
-          001027A4: 7
-          001027E0: /
-          0010281C: 6
-          00102858: &
-          00102894: 5
-          001028D0: %
-          0010290C: 4
-          00102948: $
-          00102984: 3
-          001029C0: §
-          001029FC: 2
-          00102A38: "
-          00102A74: 1
-          00102AB0: !
-          00102AEC: [ESC]    
-          00102B38:       
+          00100A68: 
+          00100AA0: 
+          00100AD8: 
+          00100B10: [F12]    
+          00100B5C: [F11]   
+          00100BA4: <
+          00100BE0: >
+          00100C1C: 
+          00100C54: 
+          00100C8C: ,
+          00100CC8: [Entf]   
+          00100D14: 0
+          00100D50: [Einf]   
+          00100D9C: 3
+          00100DD8: [Bild D] 
+          00100E24: 2
+          00100E60: [Pfeil O]
+          00100EAC: 1
+          00100EE8: [End]    
+          00100F34: +
+          00100F70: 6
+          00100FAC: [Pfeil R]
+          00100FF8: 5
+          00101034: 4
+          00101070: [Pfeil L]
+          001010BC: -
+          001010F8: 9
+          00101134: [Bild O] 
+          00101180: 8
+          001011BC: [Pfeil U]
+          00101208: 7
+          00101244: [Rollen] 
+          00101290:        
+          001012D8: [Num]    
+          00101324: [F10]    
+          00101370: [F9]     
+          001013BC: [F8]     
+          00101408: [F7]     
+          00101454: [F6]     
+          001014A0: [F5]     
+          001014EC: [F4]     
+          00101538: [F3]     
+          00101584: [F2]     
+          001015D0: [F1]     
+          0010161C: [Caps]   
+          00101668:          
+          001016B4: [Alt Gr] 
+          00101700: *
+          0010173C: -
+          00101778: _
+          001017B4: .
+          001017F0: :
+          0010182C: ,
+          00101868: ;
+          001018A4: m
+          001018E0: M
+          0010191C: n
+          00101958: N
+          00101994: b
+          001019D0: B
+          00101A0C: v
+          00101A48: V
+          00101A84: c
+          00101AC0: C
+          00101AFC: x
+          00101B38: X
+          00101B74: y
+          00101BB0: Y
+          00101BEC: #
+          00101C28: '
+          00101C64: ^
+          00101CA0: °
+          00101CDC: ae
+          00101D18: AE
+          00101D54: oe
+          00101D90: OE
+          00101DCC: l
+          00101E08: L
+          00101E44: k
+          00101E80: K
+          00101EBC: j
+          00101EF8: J
+          00101F34: h
+          00101F70: H
+          00101FAC: g
+          00101FE8: G
+          00102024: f
+          00102060: F
+          0010209C: d
+          001020D8: D
+          00102114: s
+          00102150: S
+          0010218C: a
+          001021C8: A
+          00102204: [STRG]   
+          00102250: +
+          0010228C: *
+          001022C8: ue
+          00102304: UE
+          00102340: p
+          0010237C: P
+          001023B8: o
+          001023F4: O
+          00102430: i
+          0010246C: I
+          001024A8: u
+          001024E4: U
+          00102520: z
+          0010255C: Z
+          00102598: t
+          001025D4: T
+          00102610: r
+          0010264C: R
+          00102688: e
+          001026C4: E
+          00102700: w
+          0010273C: W
+          00102778: q
+          001027B4: Q
+          001027F0: `
+          0010282C: ´
+          00102868: ss
+          001028A4: ?
+          001028E0: 0
+          0010291C: =
+          00102958: 9
+          00102994: )
+          001029D0: 8
+          00102A0C: (
+          00102A48: 7
+          00102A84: /
+          00102AC0: 6
+          00102AFC: &
+          00102B38: 5
+          00102B74: %
+          00102BB0: 4
+          00102BEC: $
+          00102C28: 3
+          00102C64: §
+          00102CA0: 2
+          00102CDC: "
+          00102D18: 1
+          00102D54: !
+          00102D90: [ESC]    
+          00102DDC:       
 - methods:
-no entry->00105184: #constr# Keyboard() (statCall) (stmtCnt==0, 9 bytes)
-no entry->001051A0: void decodInput(byte) (statCall) (stmtCnt==16, 95 bytes)
-no entry->00105210: java.lang.String getregularSymbol(byte) (may be reduced to private) (statCall) (stmtCnt==345, 3222 bytes)
-- size of code for methods: 3326 bytes
+no entry->001062D0: #constr# Keyboard() (statCall) (stmtCnt==0, 9 bytes)
+no entry->00000000: void decodInput(byte) (skip candidate) (statCall) (stmtCnt==16, 0 bytes)
+no entry->001062EC: java.lang.String getregularSymbol(byte) (may be reduced to private) (statCall) (stmtCnt==345, 3216 bytes)
+- size of code for methods: 3225 bytes
 - added imports:
 - added interface-maps:
 
 ----------
-class Content.Head at 00100228
+class Content.Head at 0010022C
 clssRelocTableEntries: 4, clssScalarTableSize: 8
 statRelocTableEntries: 0, statScalarTableSize: 24
 instRelocTableEntries: 2, instScalarTableSize: 8, instIndirScalarTableSize: 0
 - added vars:
           cnst-c/0: int MODE
           cnst-c/0: int width
-00100230->clss-s/4: int fg (may be reduced to private)
-00100234->clss-s/4: int bg (may be reduced to private)
-00100238->clss-s/1: byte color
-00100239->clss-s/1: byte colorCompl
-0010023C->clss-s/4: int pos
-00100240->clss-s/4: int start
-00100244->clss-s/4: int end
+00100234->clss-s/4: int fg (may be reduced to private)
+00100238->clss-s/4: int bg (may be reduced to private)
+0010023C->clss-s/1: byte color
+0010023D->clss-s/1: byte colorCompl
+00100240->clss-s/4: int pos
+00100244->clss-s/4: int start
+00100248->clss-s/4: int end
 - added statically allocated objects:
-          skipped :  
-          00102B7C:  
-          00102BB8:  
-          00102BF4:  
+          00102E20:  
+          00102E5C:   
+          00102E98:  
+          00102ED4:   
+          00102F10:  
+          00102F4C:  
 - methods:
-no entry->00105EB8: void init() (statCall) (stmtCnt==2, 47 bytes)
-no entry->00000000: void cls() (skip candidate) (statCall) (stmtCnt==2, 0 bytes)
-no entry->00105EF8: void frame_01(java.lang.String) (statCall) (stmtCnt==6, 70 bytes)
-no entry->00105F50: void frame_02(java.lang.String) (statCall) (stmtCnt==6, 70 bytes)
-no entry->00105FA8: void frame_03(java.lang.String) (statCall) (stmtCnt==6, 70 bytes)
-no entry->00000000: void frame_04(java.lang.String) (skip candidate) (statCall) (stmtCnt==6, 0 bytes)
-- size of code for methods: 257 bytes
+no entry->00106F8C: void init() (statCall) (stmtCnt==2, 47 bytes)
+no entry->00106FCC: void cls() (statCall) (stmtCnt==2, 13 bytes)
+no entry->00106FEC: void frame_01(java.lang.String) (statCall) (stmtCnt==6, 70 bytes)
+no entry->00107044: void frame_02(java.lang.String,int) (statCall) (stmtCnt==8, 90 bytes)
+no entry->001070B0: void frame_03(java.lang.String,int) (statCall) (stmtCnt==8, 90 bytes)
+no entry->0010711C: void frame_04(java.lang.String) (statCall) (stmtCnt==6, 70 bytes)
+- size of code for methods: 380 bytes
 - added imports:
 - added interface-maps:
 
 ----------
-class Content.Foot at 00100258
+class Content.Foot at 0010025C
 clssRelocTableEntries: 4, clssScalarTableSize: 8
-statRelocTableEntries: 0, statScalarTableSize: 24
+statRelocTableEntries: 0, statScalarTableSize: 44
 instRelocTableEntries: 2, instScalarTableSize: 8, instIndirScalarTableSize: 0
 - added vars:
           cnst-c/0: int MODE
           cnst-c/0: int width
-00100260->clss-s/4: int fg (may be reduced to private)
-00100264->clss-s/4: int bg (may be reduced to private)
-00100268->clss-s/1: byte color
-00100269->clss-s/1: byte colorCompl
-0010026C->clss-s/4: int pos
-00100270->clss-s/4: int start
-00100274->clss-s/4: int end
+00100264->clss-s/4: int fg (may be reduced to private)
+00100268->clss-s/4: int bg (may be reduced to private)
+0010026C->clss-s/1: byte color
+0010026D->clss-s/1: byte colorCompl
+00100270->clss-s/4: int pos
+00100274->clss-s/4: int start
+00100278->clss-s/4: int end
+0010027C->clss-s/1: boolean trigCol (skip candidate)
+00100280->clss-s/4: int count
+00100284->clss-s/4: int s
+00100288->clss-s/4: int m
+0010028C->clss-s/4: int h
 - added statically allocated objects:
+          00102F88: ++++
+          00102FC8: +++ 
+          00103008: ++  
+          00103048: +   
+          00103088:   
+          001030C4:  : 
+          00103104:  : 
+          skipped : KEY 
           skipped :  
-          skipped :  
-          skipped :  
-          00102C30:  
+          00103144:  
+          00103180:  
 - methods:
-no entry->00106000: void init() (statCall) (stmtCnt==2, 47 bytes)
-no entry->00000000: void cls() (skip candidate) (statCall) (stmtCnt==2, 0 bytes)
-no entry->00106040: void frame_01(java.lang.String) (statCall) (stmtCnt==6, 70 bytes)
-no entry->00000000: void frame_02(java.lang.String) (skip candidate) (statCall) (stmtCnt==6, 0 bytes)
-no entry->00000000: void frame_03(java.lang.String) (skip candidate) (statCall) (stmtCnt==6, 0 bytes)
-no entry->00000000: void frame_04(java.lang.String) (skip candidate) (statCall) (stmtCnt==6, 0 bytes)
-- size of code for methods: 117 bytes
+no entry->00107174: void init() (statCall) (stmtCnt==2, 47 bytes)
+no entry->001071B4: void cls() (statCall) (stmtCnt==2, 13 bytes)
+no entry->001071D4: void frame_01(java.lang.String) (statCall) (stmtCnt==6, 70 bytes)
+no entry->0010722C: void frame_02(int) (statCall) (stmtCnt==6, 70 bytes)
+no entry->00000000: void frame_03(int) (skip candidate) (statCall) (stmtCnt==7, 0 bytes)
+no entry->00107284: void frame_04_Timer() (statCall) (stmtCnt==29, 262 bytes)
+- size of code for methods: 462 bytes
 - added imports:
 - added interface-maps:
 
 ----------
-class Content.Body at 00100288
+class Content.Body at 001002A0
 clssRelocTableEntries: 4, clssScalarTableSize: 8
 statRelocTableEntries: 0, statScalarTableSize: 24
 instRelocTableEntries: 2, instScalarTableSize: 8, instIndirScalarTableSize: 0
 - added vars:
           cnst-c/0: int MODE
-00100290->clss-s/4: int fg (may be reduced to private)
-00100294->clss-s/4: int bg (may be reduced to private)
-00100298->clss-s/1: byte color
-00100299->clss-s/1: byte colorCompl
-0010029C->clss-s/4: int pos
-001002A0->clss-s/4: int start
-001002A4->clss-s/4: int end
+001002A8->clss-s/4: int fg (may be reduced to private)
+001002AC->clss-s/4: int bg (may be reduced to private)
+001002B0->clss-s/1: byte color
+001002B1->clss-s/1: byte colorCompl
+001002B4->clss-s/4: int pos
+001002B8->clss-s/4: int start
+001002BC->clss-s/4: int end
 - added statically allocated objects:
           skipped : EBX
           skipped : TYPE
           skipped : LENGTH
           skipped : BASE
-          00102C6C:   
+          001031BC: 
+          001031F4:       
+          00103238: EAX
+          00103278:       
+          001032BC:                    
+          0010331C: 
+          00103354:       
+          00103398: ECX
+          001033D8:       
+          0010341C:                    
+          0010347C: 
+          001034B4:       
+          001034F8: EDX
+          00103538:       
+          0010357C:                    
+          001035DC: 
+          00103614:       
+          00103658: EBX
+          00103698:       
+          001036DC:                    
+          0010373C: 
+          00103774:       
+          001037B8: ESP
+          001037F8:       
+          0010383C:                    
+          0010389C: 
+          001038D4:       
+          00103918: EBP
+          00103958:       
+          0010399C:                    
+          001039FC: 
+          00103A34:       
+          00103A78: ESI
+          00103AB8:       
+          00103AFC:                    
+          00103B5C: 
+          00103B94:       
+          00103BD8: EDI
+          00103C18:       
+          00103C5C:                    
+          00103CBC: Breakpoint O_O
+          00103D10:                    
+          00103D70:  
+          00103DAC:   
 - methods:
-no entry->00106098: void init() (statCall) (stmtCnt==2, 47 bytes)
-no entry->00000000: void cls() (skip candidate) (statCall) (stmtCnt==2, 0 bytes)
-no entry->001060D8: void frame(java.lang.String) (statCall) (stmtCnt==2, 23 bytes)
+no entry->0010739C: void init() (statCall) (stmtCnt==2, 47 bytes)
+no entry->001073DC: void cls() (statCall) (stmtCnt==2, 13 bytes)
+no entry->001073FC: void blueScreen() (statCall) (stmtCnt==3, 28 bytes)
+no entry->00107428: void frame(java.lang.String) (statCall) (stmtCnt==2, 23 bytes)
 no entry->00000000: void frame(int) (skip candidate) (statCall) (stmtCnt==2, 0 bytes)
 no entry->00000000: void frame(long) (skip candidate) (statCall) (stmtCnt==2, 0 bytes)
 no entry->00000000: void frameHex(long) (skip candidate) (statCall) (stmtCnt==2, 0 bytes)
-no entry->00000000: void frameHex(int) (skip candidate) (statCall) (stmtCnt==2, 0 bytes)
+no entry->00000000: void frameHexTable(int,int) (skip candidate) (statCall) (stmtCnt==0, 0 bytes)
 no entry->00000000: void frame_01(java.lang.String) (skip candidate) (statCall) (stmtCnt==0, 0 bytes)
 no entry->00000000: void frame_02(java.lang.String) (skip candidate) (statCall) (stmtCnt==0, 0 bytes)
 no entry->00000000: void frame_03(java.lang.String) (skip candidate) (statCall) (stmtCnt==0, 0 bytes)
 no entry->00000000: void frame_04(java.lang.String) (skip candidate) (statCall) (stmtCnt==0, 0 bytes)
-no entry->00106100: void ret() (statCall) (stmtCnt==4, 37 bytes)
-no entry->00106138: void newLine() (statCall) (stmtCnt==2, 13 bytes)
-no entry->00106158: void Up() (statCall) (stmtCnt==2, 17 bytes)
-no entry->0010617C: void Right() (statCall) (stmtCnt==2, 17 bytes)
-no entry->001061A0: void Left() (statCall) (stmtCnt==2, 17 bytes)
-no entry->001061C4: void Down() (statCall) (stmtCnt==2, 17 bytes)
-no entry->001061E8: void Space() (statCall) (stmtCnt==2, 13 bytes)
-no entry->00106208: void Pos1() (statCall) (stmtCnt==2, 13 bytes)
-no entry->00106228: void entf() (statCall) (stmtCnt==2, 13 bytes)
+no entry->00107450: void ret() (statCall) (stmtCnt==4, 37 bytes)
+no entry->00107488: void newLine() (statCall) (stmtCnt==2, 13 bytes)
+no entry->001074A8: void Up() (statCall) (stmtCnt==2, 17 bytes)
+no entry->001074CC: void Right() (statCall) (stmtCnt==2, 17 bytes)
+no entry->001074F0: void Left() (statCall) (stmtCnt==2, 17 bytes)
+no entry->00107514: void Down() (statCall) (stmtCnt==2, 17 bytes)
+no entry->00107538: void Space() (statCall) (stmtCnt==2, 13 bytes)
+no entry->00107558: void Pos1() (statCall) (stmtCnt==2, 13 bytes)
+no entry->00107578: void entf() (statCall) (stmtCnt==2, 13 bytes)
+no entry->00107598: void printPushA() (statCall) (stmtCnt==73, 728 bytes)
 no entry->00000000: void printMem() (skip candidate) (statCall) (stmtCnt==60, 0 bytes)
-- size of code for methods: 227 bytes
+- size of code for methods: 996 bytes
 - added imports:
 - added interface-maps:
 

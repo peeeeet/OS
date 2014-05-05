@@ -14,7 +14,8 @@ private static int count = 0;
 
 	public static void main()
 	{
-		
+		// Initialisiere für New Instance
+		rte.DynamicRuntime.init();
 		// VGA Modus
 		Display.vgaMode();
 		// Bios Screen
@@ -35,9 +36,9 @@ private static int count = 0;
 		//4c
 
 		
-		//Head.cls();
-		//Body.cls();
-		//Foot.cls();
+		Head.cls();
+		Body.cls();
+		Foot.cls();
 		
 		//Body.printMem();
 				
