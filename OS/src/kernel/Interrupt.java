@@ -3,7 +3,7 @@ package kernel;
 import map.RingBuffer;
 import Content.Body;
 import Content.Foot;
-import Memory.Memory;
+import Memory.Const;
 import devices.Keyboard;
 
 
@@ -22,7 +22,7 @@ private static Keyboard key;
 public static void init()
 {
 	// Aktuelle Addresse initialisieren
-	curAdd = Memory.INTERRUPT_TABLE_ADDRESS;
+	curAdd = Const.INTERRUPT_TABLE_ADDRESS;
 	// Initialisiere PIC
 	initPic();
 	// Tabelle zusammenbauen
@@ -147,7 +147,7 @@ public static void loadDescTable(int mode)
 	}
 	else if(mode ==1) // Protect Mode
 	{
-	tmp = (((long)Memory.INTERRUPT_TABLE_ADDRESS)<<16)|(long)Memory.INTERRUPT_TABLE_SIZE;
+	tmp = (((long)Const.INTERRUPT_TABLE_ADDRESS)<<16)|(long)Const.INTERRUPT_TABLE_SIZE;
 	}
 	MAGIC.inline(0x0F, 0x01, 0x5D);
 	MAGIC.inlineOffset(1, tmp);
@@ -191,7 +191,7 @@ public static void HandlerEx03()
 	confirmMAInterrupt();
 	
 	Content.Foot.frame_01("Breakpoint");
-	Body.blueScreen();
+	//Body.blueScreen();
 }
 
 @SJC.Interrupt

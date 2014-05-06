@@ -2,7 +2,7 @@ package rte;
 import java.lang.*;
 
 import Content.Head;
-import Memory.Memory;
+import Memory.Manager;
 
 public class DynamicRuntime {
 private static int nextFreeAddress = 0;
@@ -33,7 +33,7 @@ private static Object lastObj;
 	  if(init)
 	  {
 		  lastObj = type;
-		  nextFreeAddress = Memory.getFreeAddress();
+		  //nextFreeAddress = Memory.Manager.START_ADDRESS;
 		  
 		  while(lastObj._r_next !=null)
 			{
@@ -43,11 +43,13 @@ private static Object lastObj;
 	  }
 	  
 	  // Startaddresse
-	  startAddress = nextFreeAddress;
+	  //startAddress = nextFreeAddress;
   
 	  // Groesse berechnen
-
 	  memsize = scalarSize + relocEntries * 4;
+	  
+	  // Speicher reservieren 
+	  startAddress = Memory.Manager.alloc(memsize);
 	  
 	  // Auf 4Byte Alignieren
 	  while(memsize % 4 != 0) memsize++;

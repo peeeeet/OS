@@ -1,5 +1,6 @@
 package devices;
 
+import Stream.Out;
 import Content.Body;
 import Content.Head;
 
@@ -399,19 +400,22 @@ public class Keyboard {
 			break;
 		case 0x3C:
 			Head.frame_01("[F2]     ");
-			Body.printMem();
+			Body.printMem();			// Print Memory Map
 			// Function F2 60
 			break;
 		case 0x3D:
-			Head.frame_01("[F3]     ");
+			Head.frame_01("[F3]     ");	// Print StartAddress
 			// Function F3 61
+			Head.frame_04Hex("StartADD:",Memory.Const.START_ADDRESS);
 			break;
 		case 0x3E:
-			Head.frame_01("[F4]     ");
-			// Function F4 62
+			Head.frame_01("[F4]     "); // Print Mem Size
+			Head.frame_04("MemSize:", Memory.Manager.START_LENGTH/1024);
 			break;
 		case 0x3F:
 			Head.frame_01("[F5]     ");
+			Head.frame_04("NewObject");
+			Out out = new Out();
 			// Function F5 63
 			break;
 		case 0x40:

@@ -68,6 +68,34 @@ public static void cls()
 		Out.print(pos);
 	}
 
+	public static void frame_04Hex(String str, int val)
+	{
+		Output.putMode(MODE);
+		Cursor.setAbs(60, 0);
+		
+		for(int i = 0; i < width; i++)
+			Out.print(" ");
+		
+		Cursor.setAbs(60, 0);
+		Out.print(str);
+		Hex.print(val);
+
+	}
+	
+	public static void frame_04(String str, int val)
+	{
+		Output.putMode(MODE);
+		Cursor.setAbs(60, 0);
+		
+		for(int i = 0; i < width; i++)
+			Out.print(" ");
+		
+		Cursor.setAbs(60, 0);
+		Out.print(str);
+		Out.print(val);
+
+	}
+	
 	public static void frame_04(String str)
 	{
 		Output.putMode(MODE);

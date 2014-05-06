@@ -14,28 +14,29 @@ private static int count = 0;
 
 	public static void main()
 	{
-
-		// VGA Modus
-	    Display.vgaMode();
-		//	 Bios Screen
-		Grafic.biosScreen();
-		// Text Modus
-		Display.textMode();
-		
-		//Display & Interrupt init
-		Interrupt.init();	
-		Interrupt.activate();
-		
 		// Bildschirmbereiche initialisieren
 		Head.init();
 		Body.init();
 		Foot.init();
+		
 		// Bildschirmbereiche clear
 		Head.cls();
 		Body.cls();
 		Foot.cls();
-		// Print Mem
-		Body.printMem();
+		
+		// Speicherverwaltung initialisieren
+		Memory.Manager.init();		
+		// Interrupt initialisieren
+		Interrupt.init();
+		// VGA Modus
+	    Display.vgaMode();
+		// Bios Screen
+		Grafic.biosScreen();
+		// Text Modus
+		Display.textMode();
+		
+		Interrupt.activate();
+
 		
 		
 				

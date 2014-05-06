@@ -1,6 +1,6 @@
 package Content;
 
-import Memory.Memory;
+import Memory.Const;
 import Stream.*;
 import System.BIOS;
 import Video.Display;
@@ -66,7 +66,11 @@ public class Body
 	
 	public static void frameHexTable(int num, int i)
 	{
-
+		Output.putMode(MODE);
+		Hex.print(num);
+		Out.print("             ");
+		Out.print(i/1024);
+		Line.println(" Kb");
 	}
 	
 	public static void frame_01(String str)
@@ -246,7 +250,7 @@ public class Body
 		int type;
 		long base;
 		long leng;
-		int startAdd = Memory.MEMORY_MAP_ADDRESS;
+		int startAdd = Const.MEMORY_MAP_ADDRESS;
 		
 		BIOS.regs.EBX=0x00;
 		
@@ -255,6 +259,8 @@ public class Body
 		Cursor.setAbs(20, 2);
 		Out.print("LENGTH");
 		Cursor.setAbs(40, 2);
+		Out.print("SIZE");
+		Cursor.setAbs(50, 2);
 		Out.print("TYPE");
 		Cursor.setAbs(60, 2);
 		Out.print("EBX");
@@ -278,6 +284,9 @@ public class Body
 		Cursor.setAbs(20, i);
 		Hex.print(leng);
 		Cursor.setAbs(40, i);
+		Out.print(leng/1024);
+		Out.print(" Kb");
+		Cursor.setAbs(50, i);
 		Hex.print(type);
 		Cursor.setAbs(60, i);
 		Hex.print(BIOS.regs.EBX);
@@ -290,6 +299,9 @@ public class Body
 		Cursor.setAbs(20, i);
 		Hex.print(leng);
 		Cursor.setAbs(40, i);
+		Out.print(leng/1024);
+		Out.print(" Kb");
+		Cursor.setAbs(50, i);
 		Hex.print(type);
 		Cursor.setAbs(60, i);
 		Hex.print(BIOS.regs.EBX);
@@ -298,10 +310,14 @@ public class Body
 		{
 		Cursor.setAbs(0, i);
 		Output.setColor(Colors.organge,Colors.white);
+		Cursor.setAbs(0, i);
 		Hex.print(base);
 		Cursor.setAbs(20, i);
 		Hex.print(leng);
 		Cursor.setAbs(40, i);
+		Out.print(leng/1024);
+		Out.print(" Kb");
+		Cursor.setAbs(50, i);
 		Hex.print(type);
 		Cursor.setAbs(60, i);
 		Hex.print(BIOS.regs.EBX);

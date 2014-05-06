@@ -16,7 +16,7 @@ public class Output {
 	protected static byte curCol;
 	protected static byte curColComp;
 	
-	protected Output() {
+	public Output() {
 		putMode(1);
 	}
 
