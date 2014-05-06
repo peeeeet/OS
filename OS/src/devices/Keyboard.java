@@ -38,8 +38,6 @@ public class Keyboard {
 			
 		}
 		
-		
-		
 	}
 
 	public String getregularSymbol(byte cod) {
@@ -49,6 +47,7 @@ public class Keyboard {
 		switch (val) {
 		case 0x01:
 			Head.frame_01("[ESC]    ");
+			Body.cls();
 			break;
 		case 0x02:
 			if (caps)
@@ -285,6 +284,13 @@ public class Keyboard {
 			else
 				caps = true; // Function Gross
 			break;
+		case 0xAA:			 // Taste Loslasen
+			if (caps)
+				caps = false;
+			else
+				caps = true; // Function Gross
+			break;
+			
 		case 0x2B:
 			if (caps)
 				symbol = "'";
@@ -353,13 +359,15 @@ public class Keyboard {
 			break;
 		case 0x36:
 			if (caps)
-			{
 				caps = false;
-			}
 			else
-			{
 				caps = true; // Function Gross 54
-			}
+			break;
+		case 0xB6:
+			if (caps)
+				caps = false;
+			else
+				caps = true; // Taste Loslassen Gross 54
 			break;
 		case 0x37:
 			symbol = "*"; // Function 55
@@ -386,10 +394,12 @@ public class Keyboard {
 			break;
 		case 0x3B:
 			Head.frame_01("[F1]     ");
+			MAGIC.inline(0xCC); 		// Breakpoint
 			// Function F1 59
 			break;
 		case 0x3C:
 			Head.frame_01("[F2]     ");
+			Body.printMem();
 			// Function F2 60
 			break;
 		case 0x3D:

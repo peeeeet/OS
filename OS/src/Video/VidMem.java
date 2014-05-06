@@ -1,6 +1,6 @@
 package Video;
 
-import kernel.Memory;
+import Memory.Memory;
 
 public class VidMem extends STRUCT {
 	

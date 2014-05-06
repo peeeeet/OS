@@ -1,7 +1,6 @@
 package map;
 
 import Content.Foot;
-import Content.Head;
 
 
 public class RingBuffer {
@@ -13,10 +12,9 @@ private int readPos = 0;
 private int count = 0;
 private static final int size = 50;
 
-public void init()
+public RingBuffer()
 {
-	buffer = new byte[size];
-	Head.frame_01("Init Buffer");
+	buffer = new byte[size];	
 }
 
 public int getPos()
@@ -47,7 +45,6 @@ public void add(byte val)
 
 public byte getCode()
 {
-
 	byte b = buffer[readPos];
 	buffer[readPos] = (byte)0x0;
 	readPos++;

@@ -2,67 +2,81 @@ package rte;
 import java.lang.*;
 
 import Content.Head;
-import kernel.Memory;
+import Memory.Memory;
 
 public class DynamicRuntime {
 private static int nextFreeAddress = 0;
 private static int  startAddress = 0;
+private static boolean init = true;
+private static Object lastObj;
 
 
-	  public static void init()
-	  {		  
-		  startAddress = Memory.getFreeAddress();
+	  public static Object getLastObj()
+	  {
+		  return lastObj;
 	  }
-	
+
+	  public static void setLastObj(Object o)
+	  {
+		  lastObj = o;
+	  }
+	  
 	  public static Object newInstance(int scalarSize, int relocEntries, SClassDesc type) 
-	  	  {	
+  	  {	
+	  
+	  // Variablen
+	  int memsize;
+	  
+	  
+	  // Bei der ersten Initialisierung wird Heap durchsucht und
+	  // erste speicheraddrese ermittelt
+	  if(init)
+	  {
+		  lastObj = type;
+		  nextFreeAddress = Memory.getFreeAddress();
 		  
-		  // Variablen
-		  int memsize;
-		  Object lastObj = type;;
-		  
-		  
-		  // Startaddresse
-		  startAddress = nextFreeAddress;
-		  
-		  // Letztes Objekt ermitteln
 		  while(lastObj._r_next !=null)
 			{
 			  lastObj = lastObj._r_next;
 			}
-		  
-		  
-		  // Groesse berechnen
+		  init = false;
+	  }
+	  
+	  // Startaddresse
+	  startAddress = nextFreeAddress;
+  
+	  // Groesse berechnen
 
-		  memsize = scalarSize + relocEntries * 4;
-		  
-		  // Auf 4Byte Alignieren
-		  while(memsize % 4 != 0) memsize++;
-		  
-		  // Speicherbereich festlegen
-		  nextFreeAddress += memsize;
-		  
-		  // Speicherbereich initialisieren
-		  for(int i=startAddress; i<nextFreeAddress; i+=4) 
-			  {
-			  MAGIC.wMem32(i, 0);
-			  }
-		  
-		  // Object Variable initialisieren
-		  Object obj;
-		  obj = MAGIC.cast2Obj(startAddress+relocEntries*4);
-		  
-		  // Ref und Scalar Größen im Obj speichern
-		  MAGIC.assign(obj._r_scalarSize , scalarSize); 
-		  MAGIC.assign(obj._r_relocEntries , relocEntries);
-		  MAGIC.assign(obj._r_type , type);
-		  
-		  
-		  // Nächstes Objekt
-		  MAGIC.assign(lastObj._r_next, obj);
-
-		  return obj;
+	  memsize = scalarSize + relocEntries * 4;
+	  
+	  // Auf 4Byte Alignieren
+	  while(memsize % 4 != 0) memsize++;
+	  
+	  // Speicherbereich festlegen
+	  nextFreeAddress += memsize;
+	  
+	  // Speicherbereich initialisieren
+	  for(int i=startAddress; i<nextFreeAddress; i+=4) 
+		  {
+		  MAGIC.wMem32(i, 0);
 		  }
+	  
+	  // Object Variable initialisieren
+	  Object obj;
+	  obj = MAGIC.cast2Obj(startAddress+relocEntries*4);
+	  
+	  // Ref und Scalar Größen im Obj speichern
+	  MAGIC.assign(obj._r_scalarSize , scalarSize); 
+	  MAGIC.assign(obj._r_relocEntries , relocEntries);
+	  MAGIC.assign(obj._r_type , type);
+	  
+	  // Nächstes Objekt
+	  MAGIC.assign(lastObj._r_next, obj);
+	  // letztes Objekt speichern
+	  lastObj = obj;
+	  
+	  return obj;
+	  }
 	  
 	  public static SArray newArray(int length, int arrDim, int entrySize, int stdType,
 		      SClassDesc unitType) { //unitType is not for sure of type SClassDesc

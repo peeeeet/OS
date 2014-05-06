@@ -72,7 +72,7 @@ public class Foot
 			Out.print(" ");
 		
 		Cursor.setAbs(40, 0);
-		Out.print("KEY ");
+		Out.print("ARRAY Lenght: ");
 		Hex.print(val);
 	}
 

@@ -1,6 +1,6 @@
 package Content;
 
-import kernel.Memory;
+import Memory.Memory;
 import Stream.*;
 import System.BIOS;
 import Video.Display;
@@ -27,6 +27,7 @@ public class Body
 	public static void cls()
 	{
 		Output.putMode(MODE);
+		pos = 80;
 		Screen.clear();
 	}
 	
@@ -34,7 +35,9 @@ public class Body
 	{
 		color = Color.getColor(Colors.white, Colors.blue);
 		Output.putMode(MODE);	
-		Screen.clear();
+		cls();
+		printPushA();
+		color = Color.getColor(Colors.black, Colors.white);
 	}
 	
 	public static void frame(String str)
@@ -156,7 +159,7 @@ public class Body
 		// Erste PUSHA Adresse EDI
 	    ebp+=4;
 
-
+	    Cursor.setAbs(0, 5);
 	    Line.println(" ");
 	    Out.print("                   ");
 		Line.println("Breakpoint O_O");
@@ -238,7 +241,7 @@ public class Body
 	public static void printMem()
 	{
 		Output.putMode(MODE);
-		
+		cls();
 		int i = 3;
 		int type;
 		long base;

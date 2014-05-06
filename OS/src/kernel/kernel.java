@@ -14,36 +14,31 @@ private static int count = 0;
 
 	public static void main()
 	{
-		// Initialisiere für New Instance
-		rte.DynamicRuntime.init();
+
 		// VGA Modus
-		Display.vgaMode();
-		// Bios Screen
+	    Display.vgaMode();
+		//	 Bios Screen
 		Grafic.biosScreen();
 		// Text Modus
 		Display.textMode();
-		// Clear Screen
-		//Output.directclearScreen(0, Colors.black);
-		//Output.directclearScreen(1, Colors.white);
-		//Output.directclearScreen(2, Colors.black);
 		
 		//Display & Interrupt init
 		Interrupt.init();	
-		//Interrupt.activate();
+		Interrupt.activate();
+		
+		// Bildschirmbereiche initialisieren
 		Head.init();
 		Body.init();
 		Foot.init();
-		//4c
-
-		
+		// Bildschirmbereiche clear
 		Head.cls();
 		Body.cls();
 		Foot.cls();
+		// Print Mem
+		Body.printMem();
 		
-		//Body.printMem();
+		
 				
-		Interrupt.activate();
-		
 	}
 	
 }

@@ -1,4 +1,4 @@
-package kernel;
+package Memory;
 
 public class Memory 
 {

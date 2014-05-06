@@ -3,14 +3,7 @@ package kernel;
 import map.RingBuffer;
 import Content.Body;
 import Content.Foot;
-import Stream.Colors;
-import Stream.Hex;
-import Stream.Output;
-import Stream.Grafic;
-import Stream.Screen;
-import Video.Display;
-import Video.VidMem;
-import rte.DynamicRuntime;
+import Memory.Memory;
 import devices.Keyboard;
 
 
@@ -23,7 +16,6 @@ private static int mask = 0x8E00; // 1000 1110 0000 0000
 public static int count=0;
 private static RingBuffer buffer;
 private static Keyboard key;
-private static boolean trigCol = false;
 
 
 
@@ -41,17 +33,13 @@ public static void init()
 
 public static void activate()
 {
-	// Ring Buffer
-	
-	// Keyboard
+	// Keyboard & Buffer erstellen
 	buffer = new RingBuffer();
 	key = new Keyboard();
-	
-	// Buffer und Keyboard initialisieren
-	buffer.init();
+
+	// Interrupts aktivieren
 	activateInterrupts();
-	
-	
+		
 }	
 
 public static void buildIntTable()
@@ -204,7 +192,6 @@ public static void HandlerEx03()
 	
 	Content.Foot.frame_01("Breakpoint");
 	Body.blueScreen();
-	Body.printPushA();
 }
 
 @SJC.Interrupt
@@ -278,18 +265,15 @@ public static void HandlerEx15(int x)
 @SJC.Interrupt
 public static void HandlerEx32()
 {
-	
-	if(buffer.getCount()>2)
+	if(buffer.getCount()>0)
 	{
-			//key.decodInput((buffer.getCode()));	
+			key.decodInput((buffer.getCode()));	
 	}
 
 
 	Content.Head.frame_02("P",buffer.getPos());
-
 	Content.Head.frame_03("R",buffer.getreadPos());
 
-	//count ++;
 	Foot.frame_04_Timer();
 	confirmSLInterrupt();
 	confirmMAInterrupt();
@@ -306,6 +290,7 @@ public static void HandlerEx33()
 	Foot.frame_02(val);
 	
 	buffer.add(val);	
+	
 	confirmSLInterrupt();
 	confirmMAInterrupt();
 }
