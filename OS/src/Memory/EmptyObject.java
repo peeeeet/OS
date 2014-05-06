@@ -50,6 +50,7 @@ public class EmptyObject extends SClassDesc
 	  //lastObj = obj;
 	  
 	 // return obj;
+	  Head.frame_01("             ");
 	 }
 
 

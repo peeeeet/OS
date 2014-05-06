@@ -12,7 +12,7 @@ public class Output {
 	protected static int end = 1840;
 	protected static int mode = 1;
 	protected static boolean trig = false;
-	protected static int curPos = 0;
+	public static int curPos = 0;
 	protected static byte curCol;
 	protected static byte curColComp;
 	

@@ -7,10 +7,10 @@ import System.BIOS;
 import Video.Display;
 import Video.VidMem;
 import Content.*;
+import Control.*;
+import devices.Keyboard;
 public class Kernel {
 	
-private static Interrupt INTController;
-private static int count = 0;
 
 	public static void main()
 	{
@@ -34,14 +34,20 @@ private static int count = 0;
 		Grafic.biosScreen();
 		// Text Modus
 		Display.textMode();
-		
+		// Aktiviere Interrupts
 		Interrupt.activate();
-
 		
+		Scheduler.init();
 		
-				
+		int mth = MAGIC.rMem32(MAGIC.cast2Ref(MAGIC.clssDesc("Body"))+MAGIC.mthdOff("Body","frame_01"))+MAGIC.getCodeOff();
+		Task task1 = new Task(1,"Body","frame_01",mth);
+		mth = MAGIC.rMem32(MAGIC.cast2Ref(MAGIC.clssDesc("Body"))+MAGIC.mthdOff("Body","printMem"))+MAGIC.getCodeOff();
+		Task task2 = new Task(2,"Body","printMem",mth);
+		Scheduler.addTask(task1);
+		Scheduler.addTask(task2);
+		Scheduler.run();
+			
 	}
-	
 }
 	
 

@@ -1,20 +1,46 @@
 package devices;
 
+import map.RingBuffer;
 import Stream.Out;
 import Content.Body;
 import Content.Head;
 
 public class Keyboard {
 
-	private boolean caps = false;
-	private boolean numb = false;
-	private boolean scrolllock = false;
-	private boolean b1 = false;
-	private boolean b3 = false;
-	private boolean b2 = false;
-	private String tab = "      ";
+	private static boolean caps = false;
+	private static boolean numb = false;
+	private static boolean scrolllock = false;
+	private static boolean b1 = false;
+	private static boolean b3 = false;
+	private static boolean b2 = false;
+	private static String tab = "      ";
+	public static RingBuffer buffer;
+	
+	public Keyboard()
+	{
+		
+	}
+	
+	public static void init()
+	{
+		buffer = new RingBuffer();			
+	}
+	
+	public static String handleInput()
+	{
+		String val = null;
+		if(buffer.getCount()>0)
+		{
+			val = decodInput((buffer.getCode()));	
+		}
 
-	public void decodInput(byte cod) {
+
+		Content.Head.frame_02("P",buffer.getPos(),"R",buffer.getreadPos());	
+		return val;
+				
+	}
+	
+	public static String decodInput(byte cod) {
 		
 		if(cod <= 0xDF)
 		{
@@ -25,23 +51,26 @@ public class Keyboard {
 			b3 =true;
 		}
 		
-		if(b1==true)
+		if(b1)
 		{
-
-			Body.frame(getregularSymbol(cod));
+			b1=false;
+			return getregularSymbol(cod);
 		}
-		else if (b2==true)
+		else if (b2)
 		{   
-			
+			b2=false;
+			return null;
 		}
-		else if (b3==true)
+		else if (b3)
 		{
-			
+			b3=false;
+			return null;		
 		}
+		return null;
 		
 	}
 
-	public String getregularSymbol(byte cod) {
+	public static String getregularSymbol(byte cod) {
 		int val = (int) cod;
 		val = val & 0x000000FF;
 		String symbol = null;

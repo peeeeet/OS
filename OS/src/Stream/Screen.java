@@ -9,6 +9,13 @@ public class Screen {
 			
 	}
 	
+	public static void setColor(byte color) 
+	{
+			for (int j = Output.start; j < Output.end; j++)
+				Output.putColor(color);
+			
+	}
+	
 	public static void setAreaColor(int x1, int x2, int y1, int y2, int fg, int bg) {
 		int pos = Output.start + x1 + y1*80;
 		int pos2 = Output.start + x2 + y2*80;

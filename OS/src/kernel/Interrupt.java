@@ -14,8 +14,7 @@ private final static int SLAVE = 0xA0;
 private static int curAdd = 0;
 private static int mask = 0x8E00; // 1000 1110 0000 0000
 public static int count=0;
-private static RingBuffer buffer;
-private static Keyboard key;
+public static boolean tick_flag = false;
 
 
 
@@ -33,10 +32,7 @@ public static void init()
 
 public static void activate()
 {
-	// Keyboard & Buffer erstellen
-	buffer = new RingBuffer();
-	key = new Keyboard();
-
+	Keyboard.init();
 	// Interrupts aktivieren
 	activateInterrupts();
 		
@@ -191,7 +187,7 @@ public static void HandlerEx03()
 	confirmMAInterrupt();
 	
 	Content.Foot.frame_01("Breakpoint");
-	//Body.blueScreen();
+	Body.blueScreen();
 }
 
 @SJC.Interrupt
@@ -262,23 +258,19 @@ public static void HandlerEx15(int x)
 	confirmMAInterrupt();
 }
 
+// Timer Interrupt
 @SJC.Interrupt
 public static void HandlerEx32()
 {
-	if(buffer.getCount()>0)
-	{
-			key.decodInput((buffer.getCode()));	
-	}
-
-
-	Content.Head.frame_02("P",buffer.getPos());
-	Content.Head.frame_03("R",buffer.getreadPos());
+	if(count < 10)
+		tick_flag = true;
 
 	Foot.frame_04_Timer();
 	confirmSLInterrupt();
 	confirmMAInterrupt();
 }
 
+// Tastatur Interrupt
 @SJC.Interrupt
 public static void HandlerEx33()
 {
@@ -289,7 +281,7 @@ public static void HandlerEx33()
 	
 	Foot.frame_02(val);
 	
-	buffer.add(val);	
+	Keyboard.buffer.add(val);	
 	
 	confirmSLInterrupt();
 	confirmMAInterrupt();

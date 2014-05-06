@@ -1,5 +1,6 @@
 package Content;
 
+import devices.Keyboard;
 import Memory.Const;
 import Stream.*;
 import System.BIOS;
@@ -17,6 +18,7 @@ public class Body
 	public static int pos = 80;
 	public static int start = 80;
 	public static int end = 1840;
+	public static int cursor = 80;
 
 	public static void init()
 	{
@@ -46,6 +48,21 @@ public class Body
 		Out.print(str);
 	}
 	
+	public static void setframe1()
+	{
+		start = 80;
+		end = 320;
+		pos = cursor;
+		Output.putMode(MODE);
+	}
+	
+	public static void setStand()
+	{
+		pos = 80;
+		start = 80;
+		end = 1840;		
+	}
+	
 	public static void frame(int i)
 	{
 		Output.putMode(MODE);
@@ -73,81 +90,114 @@ public class Body
 		Line.println(" Kb");
 	}
 	
-	public static void frame_01(String str)
+	public static void frameTable(int num, int i)
+	{
+		Output.putMode(MODE);
+		Cursor.set(60, 0);
+		Out.print(num);
+		Out.print("    ");
+		Out.print(i/1024);
+		Out.print(" Kb");
+		Line.println("");
+	}
+	
+	public static void frame_01()
+	{
+		String val = Keyboard.handleInput();
+
+		setframe1();
+		Screen.setColor((byte)Colors.green);
+		Out.print(val);
+		cursor = Output.curPos;
+		setStand();
+
+	}
+
+	public static void frame_02(String str)
+	{
+		
+	}
+		
+	public static void frame_03(String str)
 	{
 		
 	}
 
-	public void frame_02(String str)
+	public static void frame_04(String str)
 	{
-		
-	}
-		
-	public void frame_03(String str)
-	{
-		
-	}
-
-	public void frame_04(String str)
-	{
-		
+		Output.putMode(MODE);			
 	}
 	
 	public static void ret()
 	{
-		Output.putMode(MODE);
+		setframe1();
 		Cursor.set(-1, 0);
 		Out.print("  ");
 		Cursor.set(-2, 0);	
+		setStand();
 	}
 	
 	public static void newLine()
 	{
-		Output.putMode(MODE);
+		setframe1();
 		Output.putNewLine(); // Function Enter
+		setStand();
 
 	}
 
 	public static void Up()
 	{
-		Output.putMode(MODE);
+		setframe1();
 		Cursor.set(0, 1);
+		setStand();
 
 	}
 	public static void Right()
 	{
+		setframe1();
 		Output.putMode(MODE);
 		Cursor.set(1, 0);
+		setStand();
 
 	}
 	public static void Left()
 	{
+		setframe1();
 		Output.putMode(MODE);
 		Cursor.set(-1, 0);
+		setStand();
 
 	}
 	public static void Down()
 	{
+		setframe1();
 		Output.putMode(MODE);
 		Cursor.set(0, 1);
+		setStand();
 	}
 	
 	public static void Space()
 	{
+		setframe1();
 		Output.putMode(MODE);
 		Output.putSpace();
+		setStand();
 	}
 	
 	public static void Pos1()
 	{
+		setframe1();
 		Output.putMode(MODE);
 		Output.putPos1();
+		setStand();
 	}
 	
 	public static void entf()
 	{
+		setframe1();
 		Output.putMode(MODE);
 		Output.removeChar();
+		setStand();
 	}
 	
 	
@@ -245,8 +295,7 @@ public class Body
 	public static void printMem()
 	{
 		Output.putMode(MODE);
-		cls();
-		int i = 3;
+		int i = 11;
 		int type;
 		long base;
 		long leng;
@@ -254,15 +303,15 @@ public class Body
 		
 		BIOS.regs.EBX=0x00;
 		
-		Cursor.setAbs(0, 2);
+		Cursor.setAbs(0, 10);
 		Out.print("BASE");
-		Cursor.setAbs(20, 2);
+		Cursor.setAbs(20, 10);
 		Out.print("LENGTH");
-		Cursor.setAbs(40, 2);
+		Cursor.setAbs(40, 10);
 		Out.print("SIZE");
-		Cursor.setAbs(50, 2);
+		Cursor.setAbs(50, 10);
 		Out.print("TYPE");
-		Cursor.setAbs(60, 2);
+		Cursor.setAbs(60, 10);
 		Out.print("EBX");
 		
 		do

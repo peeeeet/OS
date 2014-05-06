@@ -14,7 +14,9 @@ public class Manager
 	
 	public static void init()
 	{
+		// Überprüft alle Speicherbereiche und wählt den größten für NewInstance
 		checkMemory();
+		// Erstellt Empty Object
 		alloc(0);
 	}
 	
@@ -57,7 +59,7 @@ public class Manager
 	{
 		// Berechne neue größe des Empty Object
 		START_LENGTH -= size;
-		Body.frameHexTable(count, START_LENGTH);
+		Body.frameTable(count, START_LENGTH);
 		count ++;
 		// Erzeuge neues Empty Object
 				EmptyObject.create(START_LENGTH);
