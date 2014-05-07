@@ -5,6 +5,7 @@ import Memory.Const;
 import Stream.*;
 import System.BIOS;
 import Video.Display;
+import Application.*;
 
 public class Body 
 {
@@ -18,7 +19,7 @@ public class Body
 	public static int pos = 80;
 	public static int start = 80;
 	public static int end = 1840;
-	public static int cursor = 80;
+
 
 	public static void init()
 	{
@@ -49,15 +50,16 @@ public class Body
 	}
 	
 	public static void setframe1()
-	{
+	{		
 		start = 80;
 		end = 320;
-		pos = cursor;
 		Output.putMode(MODE);
+		Output.curPos = Editor.cursor;
 	}
 	
-	public static void setStand()
+	public static void setWhole()
 	{
+		Editor.cursor = Output.curPos;
 		pos = 80;
 		start = 80;
 		end = 1840;		
@@ -79,19 +81,34 @@ public class Body
 	{
 		Output.putMode(MODE);
 		Hex.print(l);
+		Out.print("  ");
 	}
 	
-	public static void frameHexTable(int num, int i)
+	public static void frameHexTable(int i1,int i2, int hex1, int hex2, int hex3,boolean b)
 	{
 		Output.putMode(MODE);
-		Hex.print(num);
-		Out.print("             ");
-		Out.print(i/1024);
-		Line.println(" Kb");
+		Line.println("");
+		Out.print(i1);
+		Out.print("      ");
+		Out.print(i2);
+		Out.print("      ");
+		Hex.print(hex1);
+		Out.print("      ");
+		Hex.print(hex2);
+		Out.print("      ");
+		Hex.print(hex3);
+		Out.print("      ");
+		if(b)
+			Out.print("TRUE");
+		else
+			Out.print("FALSE");
+
+		Line.println("");
 	}
 	
 	public static void frameTable(int num, int i)
 	{
+		/*
 		Output.putMode(MODE);
 		Cursor.set(60, 0);
 		Out.print(num);
@@ -99,17 +116,12 @@ public class Body
 		Out.print(i/1024);
 		Out.print(" Kb");
 		Line.println("");
+		*/
 	}
 	
 	public static void frame_01()
 	{
-		String val = Keyboard.handleInput();
 
-		setframe1();
-		Screen.setColor((byte)Colors.green);
-		Out.print(val);
-		cursor = Output.curPos;
-		setStand();
 
 	}
 
@@ -128,77 +140,7 @@ public class Body
 		Output.putMode(MODE);			
 	}
 	
-	public static void ret()
-	{
-		setframe1();
-		Cursor.set(-1, 0);
-		Out.print("  ");
-		Cursor.set(-2, 0);	
-		setStand();
-	}
-	
-	public static void newLine()
-	{
-		setframe1();
-		Output.putNewLine(); // Function Enter
-		setStand();
 
-	}
-
-	public static void Up()
-	{
-		setframe1();
-		Cursor.set(0, 1);
-		setStand();
-
-	}
-	public static void Right()
-	{
-		setframe1();
-		Output.putMode(MODE);
-		Cursor.set(1, 0);
-		setStand();
-
-	}
-	public static void Left()
-	{
-		setframe1();
-		Output.putMode(MODE);
-		Cursor.set(-1, 0);
-		setStand();
-
-	}
-	public static void Down()
-	{
-		setframe1();
-		Output.putMode(MODE);
-		Cursor.set(0, 1);
-		setStand();
-	}
-	
-	public static void Space()
-	{
-		setframe1();
-		Output.putMode(MODE);
-		Output.putSpace();
-		setStand();
-	}
-	
-	public static void Pos1()
-	{
-		setframe1();
-		Output.putMode(MODE);
-		Output.putPos1();
-		setStand();
-	}
-	
-	public static void entf()
-	{
-		setframe1();
-		Output.putMode(MODE);
-		Output.removeChar();
-		setStand();
-	}
 	
 	
 	public static void printPushA()

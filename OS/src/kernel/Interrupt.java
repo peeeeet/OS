@@ -183,11 +183,11 @@ public static void HandlerEx02()
 @SJC.Interrupt
 public static void HandlerEx03()
 {
-
-	confirmMAInterrupt();
 	
 	Content.Foot.frame_01("Breakpoint");
-	Body.blueScreen();
+	Control.Scheduler.run= false;
+	//Body.blueScreen();
+	confirmMAInterrupt();
 }
 
 @SJC.Interrupt
@@ -262,7 +262,7 @@ public static void HandlerEx15(int x)
 @SJC.Interrupt
 public static void HandlerEx32()
 {
-	if(count < 10)
+	if(count < 20)
 		tick_flag = true;
 
 	Foot.frame_04_Timer();

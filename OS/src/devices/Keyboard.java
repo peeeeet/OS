@@ -4,7 +4,7 @@ import map.RingBuffer;
 import Stream.Out;
 import Content.Body;
 import Content.Head;
-
+import Application.*;
 public class Keyboard {
 
 	private static boolean caps = false;
@@ -40,6 +40,7 @@ public class Keyboard {
 				
 	}
 	
+	
 	public static String decodInput(byte cod) {
 		
 		if(cod <= 0xDF)
@@ -51,10 +52,27 @@ public class Keyboard {
 			b3 =true;
 		}
 		
-		if(b1)
+		if(b1)					// Code nach Funktionen sortieren
 		{
-			b1=false;
-			return getregularSymbol(cod);
+			int val = (int) cod;
+			val = val & 0x000000FF;
+			
+			if(val == 0x01)																   // ESC
+				esc();
+			else if (val > 0x01 && val < 0x1C || val > 0x1D && val < 0x38 || val == 0x3A || val == 0xAA || val == 0xB6) // Alle Zeichen
+				return getregularSymbol(val);
+			else if (val == 0x1C)														   // Enter
+				strg();
+			else if (val == 0x1D)														   // STRG
+				strg();
+			else if (val == 0x38)														   // ALTGR			
+				altgr();
+			else if (val == 0x39)														   // SPACE
+				space();
+			else if (val > 0x3A && val < 0x45 || val > 0x56 && val < 0x59 )				   // Alle Funktionstasten
+				function(val);
+						
+			b1=false;			
 		}
 		else if (b2)
 		{   
@@ -69,15 +87,108 @@ public class Keyboard {
 		return null;
 		
 	}
+	
+	public static void esc()
+	{
+		Head.frame_01("[ESC]    ");
+		Body.cls();
+		if(Control.Scheduler.run == false)
+			Control.Scheduler.run= true;		
+	}
+	
+	public static void enter()
+	{
+		Editor.newLine(); // Enter 28	
+	}
+	
+	public static void strg()
+	{
+		Head.frame_01("[STRG]   ");
+		// Function STRG	
+	}
+	
+	public static void altgr()
+	{
+		Head.frame_01("[Alt Gr] ");
+		// Function AltGr 56	
+	}
+	
+	public static void space()
+	{
+		// Function Space 57
+		Editor.Space();
+	}
+	
 
-	public static String getregularSymbol(byte cod) {
-		int val = (int) cod;
-		val = val & 0x000000FF;
+	
+	public static void function(int cod)
+	{
+		switch(cod)
+		{
+		case 0x3B:
+			Head.frame_01("[F1]     ");
+			MAGIC.inline(0xCC); 		// Breakpoint
+			// Function F1 59
+			break;
+		case 0x3C:
+			Head.frame_01("[F2]     ");
+			Body.printMem();			// Print Memory Map
+			// Function F2 60
+			break;
+		case 0x3D:
+			Head.frame_01("[F3]     ");	// Print StartAddress
+			// Function F3 61
+			Head.frame_04Hex("StartADD:",Memory.Const.START_ADDRESS);
+			break;
+		case 0x3E:
+			Head.frame_01("[F4]     "); // Print Mem Size
+			Head.frame_04("MemSize:", Memory.Manager.START_LENGTH/1024);
+			break;
+		case 0x3F:
+			Head.frame_01("[F5]     ");
+			Head.frame_04("NewObject");
+			Out out = new Out();
+			// Function F5 63
+			break;
+		case 0x40:
+			Head.frame_01("[F6]     ");
+			// Function F6 64
+			break;
+		case 0x41:
+			Head.frame_01("[F7]     ");
+			// Function F7 65
+			break;
+		case 0x42:
+			Head.frame_01("[F8]     ");
+			// Function F8 66
+			break;
+		case 0x43:
+			Head.frame_01("[F9]     ");
+			// Function F9 67
+			break;
+		case 0x44:
+			Head.frame_01("[F10]    ");
+			// Function F10 68
+			break;
+		case 0x57:
+			Head.frame_01("[F11]   ");
+			// Function F11 87
+			break;
+		case 0x58:
+			Head.frame_01("[F12]    ");
+			// Function F12 88
+			break;	
+		}
+		
+	}
+	
+	
+
+	public static String getregularSymbol(int cod) {
 		String symbol = null;
-		switch (val) {
+		switch (cod) {
 		case 0x01:
-			Head.frame_01("[ESC]    ");
-			Body.cls();
+
 			break;
 		case 0x02:
 			if (caps)
@@ -152,7 +263,7 @@ public class Keyboard {
 				symbol = "`";
 			break;
 		case 0x0E: // Function Return
-			Body.ret();
+			Editor.ret();
 			break;
 		case 0x0F:
 			Body.frame(tab); // Function Tab
@@ -228,13 +339,6 @@ public class Keyboard {
 				symbol = "*";
 			else
 				symbol = "+";
-			break;
-		case 0x1C:
-			Body.newLine(); // Enter 28
-			break;
-		case 0x1D:
-			Head.frame_01("[STRG]   ");
-			// Function STRG
 			break;
 		case 0x1E:
 			if (caps)
@@ -314,7 +418,7 @@ public class Keyboard {
 			else
 				caps = true; // Function Gross
 			break;
-		case 0xAA:			 // Taste Loslasen
+		case 0xAA:			 // Taste LoslasSen
 			if (caps)
 				caps = false;
 			else
@@ -402,14 +506,6 @@ public class Keyboard {
 		case 0x37:
 			symbol = "*"; // Function 55
 			break;
-		case 0x38:
-			Head.frame_01("[Alt Gr] ");
-			// Function AltGr 56
-			break;
-		case 0x39:
-				// Function Space 57
-			Body.Space();
-			break;
 		case 0x3A:
 			if(caps)
 			{
@@ -421,51 +517,6 @@ public class Keyboard {
 				caps = true;
 				Head.frame_01("[Caps]   ");
 			}
-			break;
-		case 0x3B:
-			Head.frame_01("[F1]     ");
-			MAGIC.inline(0xCC); 		// Breakpoint
-			// Function F1 59
-			break;
-		case 0x3C:
-			Head.frame_01("[F2]     ");
-			Body.printMem();			// Print Memory Map
-			// Function F2 60
-			break;
-		case 0x3D:
-			Head.frame_01("[F3]     ");	// Print StartAddress
-			// Function F3 61
-			Head.frame_04Hex("StartADD:",Memory.Const.START_ADDRESS);
-			break;
-		case 0x3E:
-			Head.frame_01("[F4]     "); // Print Mem Size
-			Head.frame_04("MemSize:", Memory.Manager.START_LENGTH/1024);
-			break;
-		case 0x3F:
-			Head.frame_01("[F5]     ");
-			Head.frame_04("NewObject");
-			Out out = new Out();
-			// Function F5 63
-			break;
-		case 0x40:
-			Head.frame_01("[F6]     ");
-			// Function F6 64
-			break;
-		case 0x41:
-			Head.frame_01("[F7]     ");
-			// Function F7 65
-			break;
-		case 0x42:
-			Head.frame_01("[F8]     ");
-			// Function F8 66
-			break;
-		case 0x43:
-			Head.frame_01("[F9]     ");
-			// Function F9 67
-			break;
-		case 0x44:
-			Head.frame_01("[F10]    ");
-			// Function F10 68
 			break;
 		case 0x45:
 			if (numb == false) {
@@ -491,7 +542,7 @@ public class Keyboard {
 			break;
 		case 0x47:
 			if (numb == false) {
-				Body.Pos1(); // Function Pos1 71 // mit
+				Editor.Pos1(); // Function Pos1 71 // mit
 														// Num Zahl 7
 			} else
 				symbol = "7";
@@ -500,7 +551,7 @@ public class Keyboard {
 			if (numb == false) {
 				Head.frame_01("[Pfeil U]");
 				// Function Pfeil Oben 72 // mit Num Zahl 8
-				Body.Up();
+				Editor.Up();
 			} else
 				symbol = "8";
 			break;
@@ -518,7 +569,7 @@ public class Keyboard {
 			if (numb == false) {
 				Head.frame_01("[Pfeil L]");
 				// Function Pfeil links 75 // mit Num Zahl 4
-				Body.Left();
+				Editor.Left();
 			} else
 				symbol = "4";
 			break;
@@ -530,7 +581,7 @@ public class Keyboard {
 			if (numb == false) {
 				Head.frame_01("[Pfeil R]");
 				// Function Pfeil rechts 77 // mit Num Zahl 6
-				Body.Right();
+				Editor.Right();
 			} else
 				symbol = "6";
 			break;
@@ -548,7 +599,7 @@ public class Keyboard {
 			if (numb == false) {
 				Head.frame_01("[Pfeil O]");
 				// Function Pfeil runter 80 // mit Num Zahl 2
-				Body.Down();
+				Editor.Down();
 			} else
 				symbol = "2";
 
@@ -571,7 +622,7 @@ public class Keyboard {
 			if (numb == false) {
 				Head.frame_01("[Entf]   ");
 				// Function Entf 83 // mit Num Zahl
-				Body.entf();
+				Editor.entf();
 			} else
 				symbol = ",";
 			break;
@@ -589,14 +640,6 @@ public class Keyboard {
 				symbol = ">";
 			else
 				symbol = "<"; // Function < 86
-			break;
-		case 0x57:
-			Head.frame_01("[F11]   ");
-			// Function F11 87
-			break;
-		case 0x58:
-			Head.frame_01("[F12]    ");
-			// Function F12 88
 			break;
 		case 0x5D:
 			symbol = ""; // Function WIN 91

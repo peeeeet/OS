@@ -1,6 +1,7 @@
 package rte;
 import java.lang.*;
 
+import Content.Body;
 import Content.Head;
 import Memory.Manager;
 
@@ -9,7 +10,12 @@ private static int nextFreeAddress = 0;
 private static int  startAddress = 0;
 private static boolean init = true;
 private static Object lastObj;
+private static Object firstObj;
 
+	public static Object getFirstObj()
+	{
+	  return firstObj;
+	}
 
 	  public static Object getLastObj()
 	  {
@@ -39,6 +45,7 @@ private static Object lastObj;
 			{
 			  lastObj = lastObj._r_next;
 			}
+		  firstObj = lastObj;
 		  init = false;
 	  }
 	  
@@ -76,7 +83,17 @@ private static Object lastObj;
 	  MAGIC.assign(lastObj._r_next, obj);
 	  // letztes Objekt speichern
 	  lastObj = obj;
-	  
+	  /*
+	  Body.frameHex(startAddress);
+	  for(int i = 0; i < obj._r_relocEntries;i++)
+	  {
+		  Body.frameHex(MAGIC.rMem32(startAddress));
+		  startAddress += 4;  
+	  }
+	  Body.frameHex(MAGIC.cast2Ref(obj));
+	  Body.frameHex(startAddress);
+	  Body.frameHex(MAGIC.rMem32(startAddress));
+	  */
 	  return obj;
 	  }
 	  

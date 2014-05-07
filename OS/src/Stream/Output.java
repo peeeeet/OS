@@ -82,7 +82,7 @@ public class Output {
 			if (curPos < start || curPos >= end)
 				curPos = start;
 			
-			VidMem.vid.digit[curPos].ascii = color;			
+			VidMem.vid.digit[curPos].color = color;			
 		
 	}
 	

@@ -1,5 +1,7 @@
 package Control;
 
+import Content.Foot;
+import Content.Head;
 import kernel.Interrupt;
 
 public class Scheduler 
@@ -8,6 +10,7 @@ private static int NUM_TASKS=10;
 private static int count = 0;
 private static Task[] tasks;
 public static boolean start = true;
+public static boolean run = true;
 
 public static void init()
 {
@@ -67,15 +70,35 @@ int i = 0;
 		if(Interrupt.tick_flag)
 		{
 			if(i < count )
-				MethCall(tasks[i++].mth);	
-			else
+			{									
+					if(run)							// Applications nicht unterbrochen ruf nur Prio 2
+					{
+						Head.frame_04("Editor Input");
+						if(tasks[i].prio == 2)
+							MethCall(tasks[i].mth);	
+					}
+					else
+					{
+						
+						if(tasks[i].prio == 1)		// Application unterbrochen ruf nur Prio 1
+						{
+							Head.frame_04("Sys Input");
+							MethCall(tasks[i].mth);	
+						}
+					}
+					i++;					
+			}
+			else	
 				i=0;
 			
 			Interrupt.tick_flag = false;
 		}
-		
+								
 	}
+		
+		
 }
+
 	
 public static void MethCall(int add)
 {
